@@ -12,5 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(document).on('turbolinks:load', function(){
+  var oldTimeout = '';
+  clearTimeout(oldTimeout);
+  oldTimeout = setTimeout(function() {
+    $('.flash-text').fadeOut();
+  }, 3000);
+})
