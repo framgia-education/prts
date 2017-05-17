@@ -18,8 +18,8 @@ class PullRequestsController < ApplicationController
       @pull_request.status = "merged"
     when "close"
       @pull_request.status = "closed"
-    when "reopen"
-      @pull_request.status = "reopen"
+    when "ready"
+      @pull_request.status = "ready"
     end
     @pull_request.save
     redirect_to root_url
