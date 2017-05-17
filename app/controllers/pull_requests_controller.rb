@@ -10,6 +10,21 @@ class PullRequestsController < ApplicationController
     redirect_to root_url
   end
 
+  def update
+    @pull_request = PullRequest.find_by id: params[:id]
+    status = params[:status]
+    case status
+    when "merge"
+      @pull_request.status = "merged"
+    when "close"
+      @pull_request.status = "closed"
+    when "reopen"
+      @pull_request.status = "reopen"
+    end
+    @pull_request.save
+    redirect_to root_url
+  end
+
   private
 
   def pull_request_params
