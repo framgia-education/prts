@@ -18,6 +18,7 @@ gem "bootstrap-sass"
 gem "bcrypt"
 gem "kaminari"
 gem "bootstrap4-kaminari-views"
+gem "font-awesome-rails"
 
 group :development, :test do
   gem "byebug", platform: :mri

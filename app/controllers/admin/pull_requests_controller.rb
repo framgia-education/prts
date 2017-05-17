@@ -18,7 +18,7 @@ class Admin::PullRequestsController < ApplicationController
     when "conflicted"
       @pull_request.status = "conflicted"
     end
-    @pull_request.reviewer = current_user.name
+    @pull_request.reviewer = current_user.full_name
     @pull_request.save
     redirect_to request.referrer
   end

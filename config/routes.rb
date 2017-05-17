@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   namespace :admin do
     root "pull_requests#index"
     resources :pull_requests
+    resources :users
   end
 end

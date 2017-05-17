@@ -1,0 +1,43 @@
+<h2 class="text-center">Manage Users</h2>
+<%= link_to "New User", new_admin_user_path, class: "btn btn-primary" %>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @users.any? %>
+      <% @users.each_with_index do |user, index| %>
+        <tbody>
+          <td>
+            <% params[:page] ||= "1" %>
+            <%= index_for params[:page], index, 50 %>
+          </td>
+          <td><%= user.full_name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <% if user.is_admin? %>
+              Admin
+            <% else %>
+              Member
+            <% end %>
+          </td>
+          <td>
+            <% unless user.is_admin? %>
+              <%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-warning" %>
+              <% if user.stage == "tutorial" %>
+                <%= link_to "Start Project I", admin_user_path(user, type: :start_project), method: :patch, class: "btn btn-success" %>
+              <% end %>
+            <% end %>
+          </td>
+        </tbody>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
