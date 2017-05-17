@@ -1,0 +1,37 @@
+<div class="col-md-6 col-md-offset-3">
+  <%= form_for @pull_request do |f| %>
+    <div class="col-md-10 row">
+      <%= f.text_field :url, class: "form-control",
+        placeholder: "Paste url's new pull request here..." %>
+    </div>
+    <div class="col-md-2 row">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="col-md-12">
+  <h2 class="text-center">List of your pull requests</h2>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>URL</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Action</th>
+        <th>Reviewing</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
