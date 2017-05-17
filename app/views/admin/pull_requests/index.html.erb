@@ -1,0 +1,66 @@
+<h2 class="text-center">List Pull Requests</h2>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Url</th>
+      <th>Trainee</th>
+      <th>Stage</th>
+      <th>Status</th>
+      <th>Create At</th>
+      <th>Action</th>
+      <th>Reviewer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @pull_requests.any? %>
+      <% @pull_requests.each_with_index do |pull_request, index| %>
+        <tr>
+          <td>
+            <% params[:page] ||= "1" %>
+            <%= index_for params[:page], index, 10 %>
+          </td>
+          <td><%= link_to pull_request.url, pull_request.url, target: "_blank" %></td>
+          <td><%= pull_request.user.name %></td>
+          <td><%= pull_request.user.stage %></td>
+          <td><%= pull_request.status %></td>
+          <td><%= l pull_request.created_at, format: :long %></td>
+          <td>
+            <%= link_to admin_pull_request_path(pull_request, status: :reviewing),
+              class: "btn btn-primary", method: :patch do %>
+              review
+            <% end %>
+            <%= link_to admin_pull_request_path(pull_request, status: :commented),
+              class: "btn btn-success", method: :patch do %>
+              comment
+            <% end %>
+            <%= link_to admin_pull_request_path(pull_request, status: :merged),
+              class: "btn btn-info", method: :patch do %>
+              merged
+            <% end %>
+            <%= link_to admin_pull_request_path(pull_request, status: :replied),
+              class: "btn btn-warning", method: :patch do %>
+              replied
+            <% end %>
+            <%= link_to admin_pull_request_path(pull_request, status: :conflict),
+              class: "btn btn-success", method: :patch do %>
+              conflict
+            <% end %>
+          </td>
+          <td>
+            <% if pull_request.reviewer %>
+              <%= pull_request.reviewer %>
+            <% else %>
+              N/A
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= paginate @pull_requests, theme: "twitter-bootstrap-4" %>
+</div>

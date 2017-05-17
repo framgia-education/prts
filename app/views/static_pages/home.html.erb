@@ -28,7 +28,7 @@
         <% @pull_requests.each_with_index do |pull_request, index| %>
           <tr>
             <td><%= index + 1 %></td>
-            <td><%= pull_request.url %></td>
+            <td><%= link_to pull_request.url, pull_request.url, target: "_blank" %></td>
             <td><%= pull_request.status %></td>
             <td><%= l pull_request.created_at, format: :long %></td>
             <td>
@@ -40,11 +40,11 @@
               <% end %>
               <%= link_to pull_request_path(pull_request, status: :reopen), class: "btn btn-warning", method: :patch do %>
                 reopen
-              <% end  %>
+              <% end %>
             </td>
             <td>
-              <% if pull_request.reviewer_id %>
-                <%= pull_request.reviewer_id %>
+              <% if pull_request.reviewer %>
+                <%= pull_request.reviewer %>
               <% else %>
                 N/A
               <% end %>
