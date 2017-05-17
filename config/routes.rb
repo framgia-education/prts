@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   resources :users
   resources :pull_requests
+  namespace :admin do
+    root "pull_requests#index"
+    resources :pull_requests
+  end
 end

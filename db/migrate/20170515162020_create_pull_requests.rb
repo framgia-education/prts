@@ -4,7 +4,7 @@ class CreatePullRequests < ActiveRecord::Migration[5.0]
       t.string :url
       t.integer :status, default: 0
       t.references :user, foreign_key: true
-      t.integer :reviewer_id
+      t.string :reviewer
 
       t.timestamps
     end
