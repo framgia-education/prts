@@ -1,7 +1,7 @@
 <div class="col-md-6 col-md-offset-3">
   <%= form_for @pull_request do |f| %>
     <div class="col-md-10 row">
-      <%= f.text_field :url, class: "form-control",
+      <%= f.text_field :url, class: "form-control", required: true,
         placeholder: "Paste url's new pull request here..." %>
     </div>
     <div class="col-md-2 row">

@@ -1,4 +1,4 @@
-<h2 class="text-center">List Pull Requests</h2>
+<h2 class="text-center">Manage Pull Requests</h2>
 
 <table class="table table-hover table-striped">
   <thead>
@@ -23,7 +23,7 @@
             <%= index_for params[:page], index, 10 %>
           </td>
           <td><%= link_to pull_request.url, pull_request.url, target: "_blank" %></td>
-          <td><%= pull_request.user.name %></td>
+          <td><%= pull_request.user.full_name %></td>
           <td><%= pull_request.user.stage %></td>
           <td><%= pull_request.status %></td>
           <td><%= l pull_request.created_at, format: :long %></td>
