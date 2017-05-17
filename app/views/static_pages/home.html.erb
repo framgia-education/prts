@@ -32,13 +32,13 @@
             <td><%= pull_request.status %></td>
             <td><%= l pull_request.created_at, format: :long %></td>
             <td>
-              <%= link_to edit_pull_request_path(pull_request), class: "btn btn-success" do %>
+              <%= link_to pull_request_path(pull_request, status: :merge), class: "btn btn-success", method: :patch do %>
                 merge
               <% end %>
-              <%= link_to edit_pull_request_path(pull_request), class: "btn btn-default" do %>
+              <%= link_to pull_request_path(pull_request, status: :close), class: "btn btn-default", method: :patch do %>
                 close
               <% end %>
-              <%= link_to edit_pull_request_path(pull_request), class: "btn btn-warning" do %>
+              <%= link_to pull_request_path(pull_request, status: :reopen), class: "btn btn-warning", method: :patch do %>
                 reopen
               <% end  %>
             </td>
