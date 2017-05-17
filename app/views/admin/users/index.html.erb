@@ -8,6 +8,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Role</th>
+      <th>Number of pull requests</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -23,11 +24,12 @@
           <td><%= user.email %></td>
           <td>
             <% if user.is_admin? %>
-              Admin
+              <b style="color: red">Admin</b>
             <% else %>
-              Member
+              <b style="color: blue">Member</b>
             <% end %>
           </td>
+          <td><%= user.pull_requests.size %></td>
           <td>
             <% unless user.is_admin? %>
               <%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-warning" %>

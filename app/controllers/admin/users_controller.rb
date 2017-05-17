@@ -3,7 +3,8 @@ class Admin::UsersController < ApplicationController
   before_action :load_user, only: [:edit, :update]
 
   def index
-    @users = User.order(first_name: :asc).page(params[:page]).per 50
+    @users = User.includes(:pull_requests).order(first_name: :asc)
+      .page(params[:page]).per 50
   end
 
   def new
@@ -14,10 +15,14 @@ class Admin::UsersController < ApplicationController
     @user = User.new user_params
     if @user.save
       flash[:success] = "Create user success!"
+      if params[:create_and_continue]
+        redirect_to new_admin_user_url
+      else
+        redirect_to admin_users_url
+      end
     else
-      flash[:danger] = "Cannot create user"
+      render :new
     end
-    redirect_to admin_users_url
   end
 
   def edit

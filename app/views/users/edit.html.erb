@@ -2,14 +2,20 @@
   <h2 class="text-center">Change password</h2>
 
   <%= form_for @user do |f| %>
-    <%= f.label :current_password %>
-    <%= f.password_field :current_password, class: "form-control", required: true %>
+    <div class="form-group">
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, class: "form-control", required: true %>
+    </div>
 
-    <%= f.label :password, "New Password" %>
-    <%= f.password_field :password, class: "form-control", required: true %>
+    <div class="form-group">
+      <%= f.label :password, "New Password" %>
+      <%= f.password_field :password, class: "form-control", required: true %>
+    </div>
 
-    <%= f.label :password_confirmation, "Confirmation New Password", required: true %>
-    <%= f.password_field :password_confirmation, class: "form-control" %>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "Confirmation New Password", required: true %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
 
     <%= f.submit "Change", class: "btn btn-primary" %>
   <% end %>

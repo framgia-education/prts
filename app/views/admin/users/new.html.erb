@@ -2,6 +2,7 @@
   <h2 class="text-center">Create New User</h2>
 
   <%= form_for [:admin, @user] do |f| %>
+    <%= render "shared/error_messages", object: f.object %>
     <div class="form-group">
       <%= f.label :full_name %>
       <%= f.text_field :full_name, class: "form-control", required: true %>
@@ -29,6 +30,8 @@
 
     <div class="form-group">
       <%= f.submit "Create", class: "btn btn-primary" %>
+      &nbsp;
+      <%= f.submit "Create and continue", class: "btn btn-primary", name: "create_and_continue" %>
     </div>
   <% end %>
 
