@@ -1,4 +1,6 @@
 class Admin::PullRequestsController < ApplicationController
+  before_action :logged_in_user, :verify_admin
+
   def index
     @pull_requests = PullRequest.includes(:user).order(created_at: :desc).page(params[:page]).per 10
   end
@@ -13,10 +15,8 @@ class Admin::PullRequestsController < ApplicationController
       @pull_request.status = "commented"
     when "merged"
       @pull_request.status = "merged"
-    when "replied"
-      @pull_request.status = "replied"
-    when "conflict"
-      @pull_request.status = "conflict"
+    when "conflicted"
+      @pull_request.status = "conflicted"
     end
     @pull_request.reviewer = current_user.name
     @pull_request.save

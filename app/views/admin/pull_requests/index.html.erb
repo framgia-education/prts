@@ -9,8 +9,9 @@
       <th>Stage</th>
       <th>Status</th>
       <th>Create At</th>
+      <th>Updated At</th>
       <th>Action</th>
-      <th>Reviewer</th>
+      <th>Latest Reviewer</th>
     </tr>
   </thead>
   <tbody>
@@ -26,26 +27,27 @@
           <td><%= pull_request.user.stage %></td>
           <td><%= pull_request.status %></td>
           <td><%= l pull_request.created_at, format: :long %></td>
+          <td><%= l pull_request.updated_at, format: :long %></td>
           <td>
-            <%= link_to admin_pull_request_path(pull_request, status: :reviewing),
-              class: "btn btn-primary", method: :patch do %>
-              review
-            <% end %>
-            <%= link_to admin_pull_request_path(pull_request, status: :commented),
-              class: "btn btn-success", method: :patch do %>
-              comment
-            <% end %>
-            <%= link_to admin_pull_request_path(pull_request, status: :merged),
-              class: "btn btn-info", method: :patch do %>
-              merged
-            <% end %>
-            <%= link_to admin_pull_request_path(pull_request, status: :replied),
-              class: "btn btn-warning", method: :patch do %>
-              replied
-            <% end %>
-            <%= link_to admin_pull_request_path(pull_request, status: :conflict),
-              class: "btn btn-success", method: :patch do %>
-              conflict
+            <% if pull_request.status != "merged" && pull_request.status != "conflicted" && pull_request.status != "commented" %>
+              <% if pull_request.status != "reviewing" %>
+                <%= link_to admin_pull_request_path(pull_request, status: :reviewing),
+                  class: "btn btn-primary", method: :patch do %>
+                  review
+                <% end %>
+              <% end %>
+              <%= link_to admin_pull_request_path(pull_request, status: :commented),
+                class: "btn btn-success", method: :patch do %>
+                comment
+              <% end %>
+              <%= link_to admin_pull_request_path(pull_request, status: :merged),
+                class: "btn btn-info", method: :patch do %>
+                merge
+              <% end %>
+              <%= link_to admin_pull_request_path(pull_request, status: :conflicted),
+                class: "btn btn-success", method: :patch do %>
+                conflicted
+              <% end %>
             <% end %>
           </td>
           <td>
