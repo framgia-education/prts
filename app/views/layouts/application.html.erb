@@ -3,17 +3,14 @@
   <head>
     <title><%= full_title yield :title %></title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
   </head>
 
   <body>
     <%= render "layouts/header" %>
     <div class="container">
-      <% flash.each do |message_type, message| %>
-        <%= content_tag :div, message, class: "alert alert-#{message_type} flash-text" %>
-      <% end %>
+      <%= render "shared/flash" %>
       <%= yield %>
     </div>
   </body>

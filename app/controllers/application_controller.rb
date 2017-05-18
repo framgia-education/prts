@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
+  before_action :authenticate_user!
+
   private
 
   def logged_in_user
@@ -17,5 +19,11 @@ class ApplicationController < ActionController::Base
       flash[:danger] = "Access denied!"
       redirect_to root_url
     end
+  end
+
+  def authenticate_user!
+    return if current_user.present?
+    flash[:notice] = "You need to sign in before continuing"
+    redirect_to login_url
   end
 end

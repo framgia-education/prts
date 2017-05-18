@@ -25,6 +25,18 @@ class User < ApplicationRecord
     def new_token
       SecureRandom.urlsafe_base64
     end
+
+    def from_omniauth auth
+      user = find_or_initialize_by(email: auth.info.email)
+      user.full_name = auth.info.name
+      user.first_name = auth.info.name.split(" ").last
+      user.provider = auth.provider
+      user.password = User.generate_unique_secure_token if user.new_record?
+      user.token = auth.credentials.token
+      user.refresh_token = auth.credentials.refresh_token
+      user.save
+      user
+    end
   end
 
   # Remembers a user in the database for use in persistent sessions.

@@ -10,15 +10,13 @@ gem "sqlite3"
 gem "puma", "~> 3.0"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
-gem "coffee-rails", "~> 4.2"
 gem "jquery-rails"
-gem "turbolinks", "~> 5"
-gem "jbuilder", "~> 2.5"
 gem "bootstrap-sass"
 gem "bcrypt"
 gem "kaminari"
 gem "bootstrap4-kaminari-views"
 gem "font-awesome-rails"
+gem "omniauth-hrsystem", git: "git@github.com:dieunb/omniauth-hrsystem.git", branch: "master"
 
 group :development, :test do
   gem "byebug", platform: :mri

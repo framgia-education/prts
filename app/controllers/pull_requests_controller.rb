@@ -1,7 +1,14 @@
 class PullRequestsController < ApplicationController
+  def index
+    @pull_request = PullRequest.new
+    @pull_requests = current_user.pull_requests
+      .includes(:user).order created_at: :desc
+  end
+
   def create
     @pull_request = PullRequest.new pull_request_params
     @pull_request.user_id = current_user.id
+
     if @pull_request.save
       flash[:success] = "Submit new pull request success!"
     else

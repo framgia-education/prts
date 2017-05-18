@@ -20,7 +20,13 @@
         <span>Remember me on this computer</span>
       <% end %>
 
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <div class="form-group">
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+    <p>Or</p>
+    <%= link_to "/auth/hr_system", class: "btn btn-primary" do %>
+      Signin with HrSystem
     <% end %>
   </div>
 </div>

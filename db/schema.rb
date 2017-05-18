@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 20170515162020) do
     t.string   "remember_digest"
     t.integer  "stage",           default: 0
     t.boolean  "is_admin"
+    t.string   "provider"
+    t.string   "token"
+    t.string   "refresh_token"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
