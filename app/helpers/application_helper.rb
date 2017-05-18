@@ -7,4 +7,13 @@ module ApplicationHelper
   def index_for object, index, per_page
     (object.to_i - 1) * per_page + index + 1
   end
+
+  def flash_class level
+    case level
+    when :notice then "alert-info"
+    when :error then "alert-error"
+    when :alert then "alert-warning"
+    when :success then "alert-success"
+    end
+  end
 end
