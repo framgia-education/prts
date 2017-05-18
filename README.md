@@ -1,3 +1,3 @@
 # Pull Requests Tracking System
 
-A tool for tracking pull requests
+A auto tool for tracking pull requests

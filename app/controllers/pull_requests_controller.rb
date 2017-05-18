@@ -3,6 +3,7 @@ class PullRequestsController < ApplicationController
     @pull_request = PullRequest.new
     @pull_requests = current_user.pull_requests
       .includes(:user).order created_at: :desc
+    @projects = Project.all.map{|p| [p.name, p.id]}
   end
 
   def create
@@ -17,19 +18,15 @@ class PullRequestsController < ApplicationController
     redirect_to root_url
   end
 
-  def update
+  def destroy
     @pull_request = PullRequest.find_by id: params[:id]
-    status = params[:status]
-    case status
-    when "merge"
-      @pull_request.status = "merged"
-    when "close"
-      @pull_request.status = "closed"
-    when "ready"
-      @pull_request.status = "ready"
+
+    if @pull_request.destroy
+      flash[:success] = "Destroy successful"
+    else
+      flash[:notice] = "Destroy failed"
     end
-    @pull_request.save
-    redirect_to root_url
+    redirect_to request.referrer
   end
 
   private
