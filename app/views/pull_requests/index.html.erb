@@ -1,7 +1,11 @@
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-8 col-md-offset-2">
   <%= form_for @pull_request do |f| %>
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-2">
+        <%= f.select :project_id, options_for_select(@projects), {},
+          {class: "form-control", required: true} %>
+      </div>
+      <div class="col-md-8">
         <%= f.text_field :url, class: "form-control", required: true,
           placeholder: "Paste url's new pull request here..." %>
       </div>
