@@ -10,23 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170518153133) do
-
-  create_table "projects", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20170515162020) do
 
   create_table "pull_requests", force: :cascade do |t|
     t.string   "url"
-    t.integer  "status",     default: 0
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.index ["project_id"], name: "index_pull_requests_on_project_id"
-    t.index ["user_id"], name: "index_pull_requests_on_user_id"
+    t.integer  "status",           default: 0
+    t.integer  "reposistory_name"
+    t.string   "github_account"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["github_account"], name: "index_pull_requests_on_github_account"
+    t.index ["status"], name: "index_pull_requests_on_status"
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,8 +36,10 @@ ActiveRecord::Schema.define(version: 20170518153133) do
     t.string   "refresh_token"
     t.string   "chatwork_id"
     t.string   "chatwork_room_id"
+    t.string   "github_account"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.index ["github_account"], name: "index_users_on_github_account"
   end
 
 end

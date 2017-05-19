@@ -18,6 +18,7 @@ gem "bootstrap4-kaminari-views"
 gem "font-awesome-rails"
 gem "omniauth-hrsystem", git: "git@github.com:dieunb/omniauth-hrsystem.git", branch: "master"
 gem "chatwork"
+gem "config"
 
 group :development, :test do
   gem "byebug", platform: :mri

@@ -3,6 +3,12 @@
 
   <%= form_for @user do |f| %>
     <% if update_chatwork? %>
+
+      <div class="form-group">
+        <%= f.label :github_account %>
+        <%= f.text_field :github_account, class: "form-control", required: true %>
+      </div>
+
       <div class="form-group">
         <%= f.label :chatwork_id %>
         <%= f.text_field :chatwork_id, class: "form-control", required: true %>
