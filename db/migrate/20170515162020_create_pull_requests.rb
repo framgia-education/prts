@@ -3,12 +3,13 @@ class CreatePullRequests < ActiveRecord::Migration[5.0]
     create_table :pull_requests do |t|
       t.string :url
       t.integer :status, default: 0
-      t.references :user, foreign_key: true
-      t.integer :project_id
+      t.integer :reposistory_name
+      t.string :github_account
 
       t.timestamps
     end
 
-    add_index :pull_requests, :project_id
+    add_index :pull_requests, :github_account
+    add_index :pull_requests, :status
   end
 end

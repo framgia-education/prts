@@ -13,8 +13,11 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :refresh_token
       t.string :chatwork_id
       t.string :chatwork_room_id
+      t.string :github_account
 
       t.timestamps
     end
+
+    add_index :users, :github_account
   end
 end

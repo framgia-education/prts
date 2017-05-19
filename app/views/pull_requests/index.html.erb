@@ -1,21 +1,3 @@
-<div class="col-md-8 col-md-offset-2">
-  <%= form_for @pull_request do |f| %>
-    <div class="row">
-      <div class="col-md-2">
-        <%= f.select :project_id, options_for_select(@projects), {},
-          {class: "form-control", required: true} %>
-      </div>
-      <div class="col-md-8">
-        <%= f.text_field :url, class: "form-control", required: true,
-          placeholder: "Paste url's new pull request here..." %>
-      </div>
-      <div class="col-md-2">
-        <%= f.submit "Submit", class: "btn btn-primary" %>
-      </div>
-    </div>
-  <% end %>
-</div>
-
 <div class="col-md-12">
   <h2 class="text-center">List of your pull requests</h2>
   <table class="table table-hover table-striped">
