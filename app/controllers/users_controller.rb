@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit :chatwork_room_id, :chatwork_id
+    params.require(:user).permit :chatwork_room_id, :chatwork_id, :github_account
   end
 
   def load_user
