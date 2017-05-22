@@ -1,7 +1,7 @@
 class HookService
   attr_accessor :repository, :comment, :sender, :commenter
 
-  MESSAGES_VALID = ["ready", "commented", "conflicted", "merged", "closed"]
+  MESSAGES_VALID = ["ready", "commented", "conflicted", "reviewing", "merged", "closed"]
 
   def initialize payload
     @payload = JSON.parse(payload)
@@ -16,20 +16,20 @@ class HookService
   def valid?
     return false unless MESSAGES_VALID.include?(@comment_body)
 
-    if @sender == @owner && @comment_body == "ready"
+    if @sender == @owner || WhiteList.first.include?(@sender["login"])
       return true
     end
   end
 
   def make_tracking_pull_request
-    pull = PullRequest.find_by url: @pull_request.html_url
+    pull = PullRequest.find_by url: @pull_request["html_url"]
 
     if pull.present?
-      # Change pull request status
+      pull.update_attributes status: @comment_body
     else
-      PullRequest.create url: @pull_request.html_url,
-        reposistory_name: @repository.name,
-        github_account: @owner.login,
+      PullRequest.create url: @pull_request["html_url"],
+        repository_name: @repository["name"],
+        github_account: @owner["login"],
         status: "ready"
     end
   end

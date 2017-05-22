@@ -1,12 +1,9 @@
 class PullRequest < ApplicationRecord
-  belongs_to :user
-  belongs_to :project
-
   validates :url, presence: true
 
   enum status: [:ready, :commented, :conflicted, :reviewing, :merged, :closed]
 
-  after_update :send_message_to_chatwork
+  # after_update :send_message_to_chatwork
 
   private
 

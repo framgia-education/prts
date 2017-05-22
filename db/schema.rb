@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515162020) do
+ActiveRecord::Schema.define(version: 20170522132138) do
 
   create_table "pull_requests", force: :cascade do |t|
     t.string   "url"
-    t.integer  "status",           default: 0
-    t.integer  "reposistory_name"
+    t.integer  "status",          default: 0
+    t.string   "repository_name"
     t.string   "github_account"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["github_account"], name: "index_pull_requests_on_github_account"
     t.index ["status"], name: "index_pull_requests_on_status"
   end
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 20170515162020) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.index ["github_account"], name: "index_users_on_github_account"
+  end
+
+  create_table "white_lists", force: :cascade do |t|
+    t.string   "github_account"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end
