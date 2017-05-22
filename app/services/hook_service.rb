@@ -16,7 +16,8 @@ class HookService
   def valid?
     return false unless MESSAGES_VALID.include?(@comment_body)
 
-    if @sender == @owner || WhiteList.first.include?(@sender["login"])
+    if (@sender == @owner && (["ready", "closed"].include? @comment_body) ||
+      WhiteList.first.include?(@sender["login"])
       return true
     end
   end
