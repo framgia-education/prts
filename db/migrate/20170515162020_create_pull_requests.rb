@@ -3,7 +3,7 @@ class CreatePullRequests < ActiveRecord::Migration[5.0]
     create_table :pull_requests do |t|
       t.string :url
       t.integer :status, default: 0
-      t.integer :reposistory_name
+      t.string :repository_name
       t.string :github_account
 
       t.timestamps
