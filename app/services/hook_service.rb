@@ -10,10 +10,17 @@ class HookService
     @owner = @payload["issue"]["user"]
     @sender = @payload["sender"]
     @pull_request = @payload["issue"]["pull_request"]
-    @comment_body = @comment["body"].downcase
+    @comment_body = @comment["body"]
   end
 
   def valid?
+    if @comment_body.include? "-"
+      $bracket = @comment_body.split("-").third
+      $remark = @comment_body.split("-").second
+      $remark = "(" + $remark + ")" unless $bracket == "no"
+      @comment_body = @comment_body.split("-").first.downcase
+    end
+
     return false unless MESSAGES_VALID.include?(@comment_body)
     if (@sender == @owner && (["ready", "closed"].include? @comment_body)) ||
       WhiteList.first.github_account.include?(@sender["login"])
@@ -25,7 +32,7 @@ class HookService
     pull = PullRequest.find_by url: @pull_request["html_url"]
 
     if pull.present?
-      pull.update_attributes status: @comment_body
+      pull.update_attributes status: @comment_body.downcase unless(pull.status == "merged")
     else
       PullRequest.create url: @pull_request["html_url"],
         repository_name: @repository["name"],
