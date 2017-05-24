@@ -3,12 +3,8 @@ class GithubHooksController < ApplicationController
   before_action :verify_token!
 
   def create
-    # hook_service = HookService.new params[:payload]
     hook_service = HookService.new request.body.read
-
-    if hook_service.valid?
-      hook_service.make_tracking_pull_request
-    end
+    hook_service.make_tracking_pull_request  if hook_service.valid?
 
     render nothing: true
   end

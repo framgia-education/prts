@@ -5,7 +5,7 @@
     <tbody>
       <tr>
         <td>Name</td>
-        <td><%= current_user.full_name %></td>
+        <td><%= current_user.name %></td>
       </tr>
       <tr>
         <td>Email</td>
@@ -14,7 +14,7 @@
       <tr>
         <td>Account type</td>
         <td>
-          <% if current_user.is_admin? %>
+          <% if current_user.admin? %>
             <b style="color: red">Admin</b>
           <% else %>
             <b style="color: blue">Member</b>

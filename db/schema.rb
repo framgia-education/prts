@@ -24,21 +24,19 @@ ActiveRecord::Schema.define(version: 20170522132138) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "full_name"
-    t.string   "first_name"
+    t.string   "name"
     t.string   "email"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.integer  "stage",            default: 0
-    t.boolean  "is_admin"
+    t.integer  "role"
     t.string   "provider"
     t.string   "token"
     t.string   "refresh_token"
     t.string   "chatwork_id"
     t.string   "chatwork_room_id"
     t.string   "github_account"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["github_account"], name: "index_users_on_github_account"
   end
 

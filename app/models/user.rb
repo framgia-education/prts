@@ -1,17 +1,16 @@
 class User < ApplicationRecord
-  has_many :pull_requests
+  has_many :pull_requests, primary_key: :github_account, foreign_key: :github_account
 
   attr_accessor :remember_token
 
-  validates :full_name, presence: true
-  validates :first_name, presence: true
+  validates :name, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255},
     format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
-  enum stage: [:tutorial, :first_project]
+  enum role: [:normal, :trainer, :admin]
 
   class << self
     # Returns the hash digest of the given string.
@@ -28,8 +27,7 @@ class User < ApplicationRecord
 
     def from_omniauth auth
       user = find_or_initialize_by(email: auth.info.email)
-      user.full_name = auth.info.name
-      user.first_name = auth.info.name.split(" ").last
+      user.name = auth.info.name
       user.provider = auth.provider
       user.password = User.generate_unique_secure_token if user.new_record?
       user.token = auth.credentials.token
