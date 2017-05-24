@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       params[:session][:remember_me] == "1" ? remember(@user) : forget(@user)
       flash[:success] = "Welcome back!"
       # redirect_back_or @user
-      if @user.is_admin
+      if @user.admin?
         redirect_back_or admin_root_url
       else
         redirect_back_or root_url

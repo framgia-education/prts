@@ -7,7 +7,13 @@ class ApplicationController < ActionController::Base
   private
 
   def verify_admin!
-    return if current_user.is_admin?
+    return if current_user.admin?
+    flash[:danger] = "Access denied!"
+    redirect_to root_url
+  end
+
+  def verify_trainer!
+    return if current_user.admin? || current_user.trainer?
     flash[:danger] = "Access denied!"
     redirect_to root_url
   end
