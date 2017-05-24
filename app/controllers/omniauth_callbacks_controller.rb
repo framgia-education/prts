@@ -1,6 +1,13 @@
 class OmniauthCallbacksController < ApplicationController
   skip_before_action :authenticate_user!
 
+  def show
+    if current_user.present?
+      redirect_to pull_requests_path
+      return
+    end
+  end
+
   def create
     auth = request.env["omniauth.auth"]
     @user = User.from_omniauth(auth)

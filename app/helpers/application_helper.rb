@@ -16,8 +16,4 @@ module ApplicationHelper
     when :success then "alert-success"
     end
   end
-
-  def update_chatwork?
-    params[:type] == "chatwork"
-  end
 end

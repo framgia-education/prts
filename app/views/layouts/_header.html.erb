@@ -2,19 +2,13 @@
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <%= link_to "Pull Requests Tracking System", root_path, class: "navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <% if logged_in? %>
+    <% if logged_in? %>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
           <% if current_user.is_admin? %>
             <li><%= link_to "Manage User", admin_users_path %></li>
             <li><%= link_to "Manage Pull Requests", admin_pull_requests_path %></li>
@@ -29,8 +23,8 @@
               <li><%= link_to "Logout", logout_path, method: :delete %></li>
             </ul>
           </li>
-        <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    <% end %>
   </div><!-- /.container-fluid -->
 </nav>
