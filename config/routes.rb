@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "pull_requests#index"
+  root "omniauth_callbacks#show"
   get "/auth/:provider/callback", to: "omniauth_callbacks#create"
   get "/auth/failure", to: "omniauth_callbacks#failure"
   get "/login", to: "sessions#new"
