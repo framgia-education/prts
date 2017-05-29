@@ -2,6 +2,13 @@
 @import 'bootstrap';
 @import 'font-awesome';
 
+$white: #fff;
+$ready: #fbbc05;
+$commented: #30c352;
+$conflicted: #6a737d;
+$reviewing: #ea4335;
+$merged: #6f42c1;
+
 .checkbox {
   margin-top: -10px;
   margin-bottom: 10px;
@@ -34,4 +41,36 @@
 .btn,
 .form-control {
   border-radius: 2px;
+}
+
+.status-label {
+  border-radius: 3px;
+  color: $white;
+  font-weight: bold;
+  padding: 3px 10px;
+}
+
+.ready {
+  @extend .status-label;
+  background: $ready;
+}
+
+.commented {
+  @extend .status-label;
+  background: $commented;
+}
+
+.conflicted {
+  @extend .status-label;
+  background: $conflicted;
+}
+
+.reviewing {
+  @extend .status-label;
+  background: $reviewing;
+}
+
+.merged {
+  @extend .status-label;
+  background: $merged;
 }

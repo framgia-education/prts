@@ -4,7 +4,7 @@ class GithubHooksController < ApplicationController
 
   def create
     hook_service = HookService.new request.body.read
-    hook_service.make_tracking_pull_request  if hook_service.valid?
+    hook_service.make_tracking_pull_request if hook_service.valid?
 
     render nothing: true
   end

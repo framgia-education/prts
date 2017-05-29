@@ -2,17 +2,17 @@
   <h2 class="text-center">Update your information</h2>
   <%= form_for @user do |f| %>
     <div class="form-group">
-      <%= f.label :github_account %>
+      <%= f.label :github_account, "Github account" %>
       <%= f.text_field :github_account, class: "form-control", required: true %>
     </div>
 
     <div class="form-group">
-      <%= f.label :chatwork_id %>
+      <%= f.label :chatwork_id, "Chatwork account ID" %>
       <%= f.text_field :chatwork_id, class: "form-control", required: true %>
     </div>
 
     <div class="form-group">
-      <%= f.label :chatwork_room_id %>
+      <%= f.label :chatwork_room_id, "Chatwork room ID" %>
       <%= f.text_field :chatwork_room_id, class: "form-control", required: true %>
     </div>
     <%= f.submit "Change", class: "btn btn-primary" %>

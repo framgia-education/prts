@@ -8,7 +8,7 @@
       <th>Trainee</th>
       <th>Create At</th>
       <th>Updated At</th>
-      <th></th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -16,23 +16,17 @@
       <tr>
         <td>
           <% params[:page] ||= "1" %>
-          <%= index_for params[:page], index, 10 %>
+          <%= index_for params[:page], index, Settings.admin.pull_request.per_page %>
         </td>
-        <td><%= link_to pull_request.url, pull_request.url, target: "_blank" %></td>
+        <td>
+          <% url = pull_request.url + "/files" %>
+          <%= link_to url, url, target: "_blank" %>
+        </td>
         <td><%= pull_request.user_name %></td>
         <td><%= l pull_request.created_at, format: :long %></td>
         <td><%= l pull_request.updated_at, format: :long %></td>
         <td>
-          <% if pull_request.ready? %>
-            <%= link_to admin_pull_request_path(pull_request, status: :reviewing),
-              class: "btn btn-warning", method: :patch do %>
-              Review
-            <% end %>
-          <% else %>
-            <button type="button" class="btn btn-info">
-              <%= pull_request.status %>
-            </button>
-          <% end %>
+          <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
         </td>
       </tr>
     <% end %>
