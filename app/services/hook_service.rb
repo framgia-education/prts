@@ -32,7 +32,9 @@ class HookService
     pull = PullRequest.find_by url: @pull_request["html_url"]
 
     if pull.present?
-      pull.update_attributes status: @comment_body.downcase unless(pull.status == "merged")
+      return if (["ready", "reviewing"].include? pull.status) && @comment_body.downcase == "ready"
+      return if pull.merged?
+      pull.update_attributes status: @comment_body.downcase
     else
       PullRequest.create url: @pull_request["html_url"],
         repository_name: @repository["name"],

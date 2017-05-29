@@ -8,53 +8,32 @@
         <th>Status</th>
         <th>Created At</th>
         <th>Updated At</th>
-        <th>Action</th>
-        <th>Latests Reviewer</th>
       </tr>
     </thead>
     <tbody>
       <% if @pull_requests.any? %>
         <% @pull_requests.each_with_index do |pull_request, index| %>
           <tr>
-            <td><%= index + 1 %></td>
-            <td><%= link_to pull_request.url, pull_request.url, target: "_blank" %></td>
-            <td><%= pull_request.status %></td>
+            <td>
+              <% params[:page] ||= "1" %>
+              <%= index_for params[:page], index, Settings.pull_request.per_page %>
+            </td>
+            <td>
+              <% url = pull_request.url + "/files" %>
+              <%= link_to url, url, target: "_blank" %>
+            </td>
+            <td>
+              <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
+            </td>
             <td><%= l pull_request.created_at, format: :long %></td>
             <td><%= l pull_request.updated_at, format: :long %></td>
-            <td>
-              <% if pull_request.status != "merged" %>
-                <% if current_user.stage == "tutorial" %>
-                  <%= link_to pull_request_path(pull_request, status: :merge),
-                    class: "btn btn-success", method: :patch do %>
-                    merge
-                  <% end %>
-                <% end %>
-                <% if pull_request.status == "ready" %>
-                  <%= link_to pull_request_path(pull_request, status: :close),
-                    class: "btn btn-default", method: :patch do %>
-                    close
-                  <% end %>
-                <% end %>
-                <% if pull_request.status == "commented" ||
-                  pull_request.status == "conflicted" ||
-                  pull_request.status == "closed" %>
-                  <%= link_to pull_request_path(pull_request, status: :ready),
-                    class: "btn btn-warning", method: :patch do %>
-                    ready
-                  <% end %>
-                <% end %>
-              <% end %>
-            </td>
-            <td>
-              <% if pull_request.reviewer %>
-                <%= pull_request.reviewer %>
-              <% else %>
-                N/A
-              <% end %>
-            </td>
           </tr>
         <% end %>
       <% end %>
     </tbody>
   </table>
+
+  <div class="text-center">
+    <%= paginate @pull_requests, theme: "twitter-bootstrap-4" %>
+  </div>
 </div>
