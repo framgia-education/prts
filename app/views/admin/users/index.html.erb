@@ -17,11 +17,13 @@
           <% params[:page] ||= "1" %>
           <%= index_for params[:page], index, 50 %>
         </td>
-        <td><%= user.name %></td>
+        <td><%= link_to user.name, admin_user_path(user) %></td>
         <td><%= user.email %></td>
         <td>
-          <% unless user.admin? %>
-            <%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-warning" %>
+          <%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-warning" %>
+          <% unless current_user?(user) && current_user.admin? %>
+            <%= link_to "Delete", admin_user_path(user), method: :delete,
+              class: "btn btn-danger", data: {confirm: "Are you sure?"} %>
           <% end %>
         </td>
       </tbody>
