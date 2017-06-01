@@ -1,7 +1,7 @@
 class PullRequestsController < ApplicationController
   def index
-    @pull_requests = PullRequest.order(created_at: :desc)
-      .page(params[:page]).per Settings.pull_request.per_page
+    @pull_requests = current_user.pull_requests.order(created_at: :desc)
+      .page(params[:page])
   end
 
   def destroy
