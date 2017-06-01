@@ -3,12 +3,35 @@ class PullRequest < ApplicationRecord
 
   enum status: [:ready, :commented, :conflicted, :reviewing, :merged, :closed]
 
-  # after_update :send_message_to_chatwork
+  after_update :send_message_to_chatwork
 
   private
 
   def send_message_to_chatwork
-    ChatWork::Message.create room_id: user.chatwork_room_id,
-      body: "[To:#{user.chatwork_id}] \n Your pullrequest (url) is #{status}"
+    user = User.find_by github_account: github_account
+
+    return if user.nil?
+    return if user.chatwork_id.nil? || user.chatwork_room_id.nil?
+
+    pull_index = url.split("/").last
+
+    case status
+    when "ready"
+      mess = "Your pull request no. ##{pull_index} is ready. Good luck to you!\n#{url}/files"
+    when "commented"
+      mess = "Your pull request no. ##{pull_index} has been (commented)\n#{url}/files"
+    when "conflicted"
+      mess = "Your pull request no. ##{pull_index} is conflicted.\n#{url}"
+    when "reviewing"
+      mess = "Your pull request no. ##{pull_index} is under reviewing.\n#{url}/files"
+    when "merged"
+      mess = "Your pull request no. ##{pull_index} has been (merged)\n#{url}"
+    end
+
+    mess += "\n\n#{$remark}" if $remark
+    $remark = nil
+    ChatWork::Message.create room_id: 76035390,
+      body: "[To:#{user.chatwork_id}] #{user.full_name}\n" + mess
+    mess = nil
   end
 end
