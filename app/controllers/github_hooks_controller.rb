@@ -3,7 +3,7 @@ class GithubHooksController < ApplicationController
   before_action :verify_token!
 
   def create
-    hook_service = HookService.new request.body.read
+    hook_service = HookService.new request
     hook_service.make_tracking_pull_request if hook_service.valid?
 
     render nothing: true

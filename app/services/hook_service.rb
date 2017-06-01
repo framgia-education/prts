@@ -3,14 +3,20 @@ class HookService
 
   MESSAGES_VALID = ["ready", "commented", "conflicted", "reviewing", "merged", "closed"]
 
-  def initialize payload
-    @payload = JSON.parse(payload)
-    @repository = @payload["repository"]
-    @comment = @payload["comment"]
-    @owner = @payload["issue"]["user"]
-    @sender = @payload["sender"]
-    @pull_request = @payload["issue"]["pull_request"]
-    @comment_body = @comment["body"]
+  def initialize request
+    @payload = JSON.parse(request.body.read)
+
+    if @payload["action"] == "closed" && @payload["pull_request"]["merged"]
+      @merged_pull = true
+      @pull_request = @payload["pull_request"]
+    else
+      @repository = @payload["repository"]
+      @comment = @payload["comment"]
+      @owner = @payload["issue"]["user"]
+      @sender = @payload["sender"]
+      @pull_request = @payload["issue"]["pull_request"]
+      @comment_body = @comment["body"]
+    end
   end
 
   def valid?
@@ -30,6 +36,11 @@ class HookService
 
   def make_tracking_pull_request
     pull = PullRequest.find_by url: @pull_request["html_url"]
+
+    if @merged_pull
+      pull.merged!
+      return
+    end
 
     if pull.present?
       return if (["ready", "reviewing"].include? pull.status) && @comment_body.downcase == "ready"

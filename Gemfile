@@ -23,6 +23,7 @@ gem "config"
 
 group :development, :test do
   gem "byebug", platform: :mri
+  gem "pry"
   gem "sqlite3"
 end
 
