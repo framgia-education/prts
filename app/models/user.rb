@@ -12,6 +12,9 @@ class User < ApplicationRecord
 
   enum role: [:normal, :trainer, :admin]
 
+  ATTR_PARAMS = [:id, :name, :email, :password, :role,
+    :chatwork_id, :chatwork_room_id, :github_account].freeze
+
   class << self
     # Returns the hash digest of the given string.
     def digest string

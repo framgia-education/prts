@@ -1,4 +1,6 @@
 admin:
+  user:
+    per_page: 50
   pull_request:
     per_page: 30
 pull_request:
