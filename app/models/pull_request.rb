@@ -34,7 +34,7 @@ class PullRequest < ApplicationRecord
 
     mess += "\n\n#{$remark}" if $remark
     $remark = nil
-    ChatWork::Message.create room_id: 76035390,
+    ChatWork::Message.create room_id: user.chatwork_room_id,
       body: "[To:#{user.chatwork_id}] #{user.name}\n" + mess
     mess = nil
   end

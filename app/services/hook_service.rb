@@ -1,15 +1,17 @@
 class HookService
-  attr_accessor :repository, :comment, :sender, :commenter
+  attr_reader :repository, :comment, :sender, :commenter, :action
 
   MESSAGES_VALID = ["ready", "commented", "conflicted", "reviewing", "merged", "closed"]
 
   def initialize request
     @payload = JSON.parse(request.body.read)
+    @action = @payload["action"]
 
-    if @payload["action"] == "closed" && @payload["pull_request"]["merged"]
+    Rails.logger.info "---------------------------> #{@action}"
+    if @action == "closed" && @payload["pull_request"]["merged"]
       @merged_pull = true
       @pull_request = @payload["pull_request"]
-    else
+    elsif @action == "created"
       @repository = @payload["repository"]
       @comment = @payload["comment"]
       @owner = @payload["issue"]["user"]
@@ -20,6 +22,12 @@ class HookService
   end
 
   def valid?
+    return false if ["assigned", "unassigned", "review_requested",
+      "review_request_removed", "labeled", "unlabeled", "opened", "edited",
+      "reopened", "submitted", "deleted", "synchronize", "dismissed"].include?(@action)
+
+    return true if @merged_pull
+
     if @comment_body.include? "-"
       $bracket = @comment_body.split("-").third
       $remark = @comment_body.split("-").second
@@ -28,6 +36,7 @@ class HookService
     end
 
     return false unless MESSAGES_VALID.include?(@comment_body)
+
     if (@sender == @owner && (["ready", "closed"].include? @comment_body)) ||
       WhiteList.first.github_account.include?(@sender["login"])
       return true
@@ -47,10 +56,16 @@ class HookService
       return if pull.merged?
       pull.update_attributes status: @comment_body.downcase
     else
-      PullRequest.create url: @pull_request["html_url"],
+      pull = PullRequest.create url: @pull_request["html_url"],
         repository_name: @repository["name"],
         github_account: @owner["login"],
         status: "ready"
+    end
+
+    if @payload["pull_request"] && @payload["pull_request"]["commits"] > 1
+      message = "Your pull request #{pull.url} has one more commits (tat)!!!"
+      ChatWork::Message.create room_id: pull.user.chatwork_room_id,
+        body: "[To:#{pull.user.chatwork_id}] #{pull.user.name}\n" + message
     end
   end
 end
