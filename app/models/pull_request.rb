@@ -1,4 +1,6 @@
 class PullRequest < ApplicationRecord
+  paginates_per Settings.pull_request.per_page
+
   belongs_to :user, primary_key: :github_account, foreign_key: :github_account
 
   validates :url, presence: true
