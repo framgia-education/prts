@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :email
       t.string :password_digest
       t.string :remember_digest
-      t.integer :role
+      t.integer :role, default: 0
       t.string :provider
       t.string :token
       t.string :refresh_token
