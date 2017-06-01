@@ -6,7 +6,7 @@ class GithubHooksController < ApplicationController
     hook_service = HookService.new request
     hook_service.make_tracking_pull_request if hook_service.valid?
 
-    render nothing: true
+    head :ok
   end
 
   private
@@ -15,7 +15,7 @@ class GithubHooksController < ApplicationController
     @token = params[:access_token]
 
     if @token.blank? || @token != Settings.access_token
-      render nothing: true
+      head :ok
       return
     end
   end

@@ -8,6 +8,9 @@ $commented: #30c352;
 $conflicted: #6a737d;
 $reviewing: #ea4335;
 $merged: #6f42c1;
+$alabaster-color: #f8f8f8;
+$silver-color: #bbb;
+$black: #000;
 
 .checkbox {
   margin-top: -10px;
@@ -44,10 +47,10 @@ $merged: #6f42c1;
 }
 
 .status-label {
-  border-radius: 3px;
+  border-radius: 2px;
   color: $white;
-  font-weight: bold;
-  padding: 3px 10px;
+  font-weight: 500;
+  padding: 5px 10px;
 }
 
 .ready {
@@ -74,3 +77,36 @@ $merged: #6f42c1;
   @extend .status-label;
   background: $merged;
 }
+
+.role-select {
+  position: relative;
+  select {
+    -webkit-appearance: none;
+    appearance: none;
+    background: $alabaster-color;
+    border: 1px solid $silver-color;
+    border-radius: 2px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.2;
+    margin: 0;
+    outline: none;
+    padding: 6px 12px;
+  }
+
+  &::before {
+    background: transparent;
+    border-radius: 0 2px 2px 0;
+    bottom: 0;
+    color: $black;
+    content: '▼';
+    font-size: 60%;
+    line-height: 25px;
+    padding: 0 7px;
+    pointer-events: none;
+    position: absolute;
+    right: 7px;
+    top: 5px;
+  }
+}
+
