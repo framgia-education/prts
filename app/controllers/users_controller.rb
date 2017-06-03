@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :load_user
+  before_action :load_user, :verify_user!
 
   def show
   end
@@ -29,6 +29,12 @@ class UsersController < ApplicationController
 
     return if @user.present?
     flash[:danger] = "User is not exist!"
+    redirect_to root_url
+  end
+
+  def verify_user!
+    return if current_user? @user
+    flash[:alert] = "Access denied!"
     redirect_to root_url
   end
 end

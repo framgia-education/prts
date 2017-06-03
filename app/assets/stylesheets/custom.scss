@@ -9,6 +9,7 @@ $commented: #30c352;
 $conflicted: #6a737d;
 $merged: #6f42c1;
 $ready: #fbbc05;
+$red: #f00;
 $reviewing: #ea4335;
 $silver-color: #bbb;
 $white: #fff;
@@ -111,7 +112,13 @@ $white: #fff;
   }
 }
 
-.amount {
-  font-weight: bold;
+.amount,
+.trainer {
   color: $blue;
+  font-weight: bold;
+}
+
+.admin {
+  color: $red;
+  font-weight: bold;
 }
