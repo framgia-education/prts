@@ -1,5 +1,10 @@
 <h2 class="text-center">Manage Users</h2>
-<%= link_to "New User", new_admin_user_path, class: "btn btn-primary" %>
+<p>
+  <%= link_to new_admin_user_path, class: "btn btn-primary" do %>
+    <span class="glyphicon glyphicon-plus"></span> New User
+  <% end %>
+</p>
+<p class="amount">Number of items: <%= @users_size %></p>
 
 <table class="table table-hover table-striped">
   <thead>
@@ -7,7 +12,8 @@
       <th>#</th>
       <th>Name</th>
       <th>Email</th>
-      <th></th>
+      <th>Number of Pull requests</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -19,11 +25,18 @@
         </td>
         <td><%= link_to user.name, admin_user_path(user) %></td>
         <td><%= user.email %></td>
+        <td><%= user.pull_requests.size %></td>
         <td>
-          <%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-warning" %>
+          <%= link_to edit_admin_user_path(user), title: "Edit",
+            class: "btn btn-warning btn-xs" do %>
+            <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
+
           <% unless current_user?(user) && current_user.admin? %>
-            <%= link_to "Delete", admin_user_path(user), method: :delete,
-              class: "btn btn-danger", data: {confirm: "Are you sure?"} %>
+            <%= link_to admin_user_path(user), method: :delete, title: "Delete",
+              class: "btn btn-danger btn-xs", data: {confirm: "Are you sure?"} do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
           <% end %>
         </td>
       </tbody>

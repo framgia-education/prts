@@ -3,6 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :load_user, except: [:index, :new, :create]
 
   def index
+    @users_size = User.count
     @users = User.includes(:pull_requests).order(name: :asc)
       .page(params[:page]).per Settings.admin.user.per_page
   end
@@ -22,7 +23,7 @@ class Admin::UsersController < ApplicationController
       flash[:success] = "Create successfully!"
       params[:create_and_continue].nil? ? redirect_to(admin_users_url) : render(:new)
     else
-      flash.now[:error] = "Create failed"
+      flash.now[:alert] = "Create failed"
       render :new
     end
   end
@@ -32,7 +33,7 @@ class Admin::UsersController < ApplicationController
       flash[:success] = "Update successfully"
       redirect_to admin_users_url
     else
-      flash.now[:danger] = "Update failed"
+      flash.now[:alert] = "Update failed"
       render :edit
     end
   end
@@ -41,7 +42,7 @@ class Admin::UsersController < ApplicationController
     if @user.destroy
       flash[:success] = "Delete successfully"
     else
-      flash[:error] = "Delete failed"
+      flash[:alert] = "Delete failed"
     end
     redirect_to admin_users_url
   end
@@ -56,7 +57,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find_by id: params[:id]
 
     unless @user
-      flash[:error] = "Not found user"
+      flash[:alert] = "Oops! User not found"
       redirect_to admin_users_url
     end
   end
