@@ -28,7 +28,7 @@ class HookService
 
     return true if @merged_pull
 
-    if @comment_body.include? "-"
+    if @comment_body && @comment_body.include?("-")
       $bracket = @comment_body.split("-").third
       $remark = @comment_body.split("-").second
       $remark = "(" + $remark + ")" unless $bracket == "no"
@@ -47,13 +47,19 @@ class HookService
     pull = PullRequest.find_by url: @pull_request["html_url"]
 
     if @merged_pull
+      return if pull.status == "merged"
       pull.merged!
       return
     end
 
     if pull.present?
-      return if (["ready", "reviewing"].include? pull.status) && @comment_body.downcase == "ready"
       return if pull.merged?
+      return if @comment_body.downcase == pull.status
+      return if (["ready", "reviewing"].include? pull.status) && @comment_body.downcase == "ready"
+      return if (["commented", "conflicted"].include? pull.status) &&
+        (["reviewing", "merged"].include? @comment_body.downcase)
+      return if pull.status != "ready" && @comment_body.downcase == "conflicted"
+      return if pull.status == "conflicted" && @comment_body.downcase == "commented"
       pull.update_attributes status: @comment_body.downcase
     else
       pull = PullRequest.create url: @pull_request["html_url"],
