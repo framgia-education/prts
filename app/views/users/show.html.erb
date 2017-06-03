@@ -1,5 +1,5 @@
 <div class="col-md-6 col-md-offset-3">
-  <h2>User's Information</h2>
+  <h2 class="text-center">User's Information</h2>
 
   <table class="table table-stripe table-hover">
     <tbody>
@@ -14,16 +14,12 @@
       <tr>
         <td>Account type</td>
         <td>
-          <% if current_user.admin? %>
-            <b style="color: red">Admin</b>
-          <% else %>
-            <b style="color: blue">Member</b>
-          <% end %>
+          <span class="<%= current_user.role %>"><%= current_user.role %></span>
         </td>
       </tr>
       <tr>
         <td>Number of pull requests</td>
-        <td>123</td>
+        <td><%= current_user.pull_requests.size %></td>
       </tr>
     </tbody>
   </table>
