@@ -1,32 +1,51 @@
 <nav class="navbar navbar-default">
   <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <%= link_to "Pull Requests Tracking System", root_path, class: "navbar-brand" %>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <% if logged_in? %>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to Settings.user_guide, target: :_blank do %>
+            <span class="glyphicon glyphicon-book"></span> User Guide
+          <% end %>
+        </li>
+        <% if logged_in? %>
           <% if current_user.admin? ||current_user.trainer? %>
             <% if current_user.admin? %>
-              <li><%= link_to "Manage User", admin_users_path %></li>
+              <li>
+                <%= link_to admin_users_path do %>
+                  <span class="glyphicon glyphicon-user"></span> Manage User
+                <% end %>
+              </li>
             <% end %>
-            <li><%= link_to "Manage Pull Requests", admin_pull_requests_path %></li>
+            <li>
+              <%= link_to admin_pull_requests_path do %>
+                <span class="glyphicon glyphicon-list-alt"></span> Manage Pull Requests
+              <% end %>
+            </li>
           <% end %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               Hi, <%= current_user.name %> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Config", edit_user_path(current_user) %></li>
+              <li>
+                <%= link_to edit_user_path(current_user) do %>
+                  <span class="glyphicon glyphicon-cog"></span> Config
+                <% end %>
+              </li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to "Logout", logout_path, method: :delete %></li>
+              <li>
+                <%= link_to logout_path, method: :delete do %>
+                  <span class="glyphicon glyphicon-off"></span> Logout
+                <% end %>
+              </li>
             </ul>
           </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    <% end %>
-  </div><!-- /.container-fluid -->
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </nav>
