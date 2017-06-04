@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user = User.find_by id: params[:id]
 
     return if @user.present?
-    flash[:danger] = "User is not exist!"
+    flash[:error] = "User is not exist!"
     redirect_to root_url
   end
 

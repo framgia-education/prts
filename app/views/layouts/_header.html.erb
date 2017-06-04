@@ -16,7 +16,7 @@
             <% if current_user.admin? %>
               <li>
                 <%= link_to admin_users_path do %>
-                  <span class="glyphicon glyphicon-user"></span> Manage User
+                  <span class="glyphicon glyphicon-magnet"></span> Manage Users
                 <% end %>
               </li>
             <% end %>
@@ -34,6 +34,11 @@
               <li>
                 <%= link_to edit_user_path(current_user) do %>
                   <span class="glyphicon glyphicon-cog"></span> Config
+                <% end %>
+              </li>
+              <li>
+                <%= link_to current_user do %>
+                  <span class="glyphicon glyphicon-user"></span> Profile
                 <% end %>
               </li>
               <li role="separator" class="divider"></li>
