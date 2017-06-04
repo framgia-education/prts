@@ -7,19 +7,19 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem "rails", "~> 5.0.2"
-gem "puma", "~> 3.0"
-gem "sass-rails", "~> 5.0"
-gem "uglifier", ">= 1.3.0"
-gem "jquery-rails"
-gem "bootstrap-sass"
 gem "bcrypt", "3.1.11"
-gem "kaminari"
+gem "bootstrap-sass"
 gem "bootstrap4-kaminari-views"
-gem "font-awesome-rails"
-gem "omniauth-hrsystem", git: "https://github.com/dieunb/omniauth-hrsystem.git"
 gem "chatwork"
 gem "config"
+gem "font-awesome-rails"
+gem "jquery-rails"
+gem "kaminari"
+gem "omniauth-hrsystem", git: "https://github.com/dieunb/omniauth-hrsystem.git"
+gem "puma", "~> 3.0"
+gem "rails", "~> 5.0.2"
+gem "sass-rails", "~> 5.0"
+gem "uglifier", ">= 1.3.0"
 
 group :development, :test do
   gem "byebug", platform: :mri
@@ -28,10 +28,10 @@ group :development, :test do
 end
 
 group :development do
-  gem "web-console", ">= 3.3.0"
   gem "listen", "~> 3.0.5"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
+  gem "web-console", ">= 3.3.0"
 end
 
 group :production do
