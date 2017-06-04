@@ -2,7 +2,7 @@ class PullRequestsController < ApplicationController
   def index
     @pull_requests_size = current_user.pull_requests.count
     @pull_requests = current_user.pull_requests.order(created_at: :desc)
-      .page(params[:page])
+      .page(params[:page]).per Settings.pull_request.per_page
   end
 
   def destroy
