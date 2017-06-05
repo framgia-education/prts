@@ -1,39 +1,49 @@
 <% provide :title, "List of your pull requests" %>
 
-<div class="col-md-12">
-  <h2 class="text-center">List of your pull requests</h2>
-  <p class="amount">Number of items: <%= @pull_requests_size %></p>
+<h2 class="text-center">List of your pull requests</h2>
 
-  <table class="table table-hover table-striped">
-    <thead>
-      <tr>
-        <th class="index">#</th>
-        <th>URL</th>
-        <th class="status">Status</th>
-        <th class="datetime">Created At</th>
-        <th class="datetime">Updated At</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @pull_requests.each_with_index do |pull_request, index| %>
-        <tr>
-          <td>
-            <%= index_for params[:page] || 1, index, Settings.pull_request.per_page %>
-          </td>
-          <td>
-            <%= link_to pull_request.url_files, pull_request.url_files, target: "_blank" %>
-          </td>
-          <td>
-            <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
-          </td>
-          <td><%= l pull_request.created_at, format: :long %></td>
-          <td><%= l pull_request.updated_at, format: :long %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <div class="text-center">
-    <%= paginate @pull_requests, theme: "twitter-bootstrap-4", pagination_class: "pagination-sm" %>
+<div class="stats">
+  <div class="col-md-2 row">
+    <span class="amount">Number of items: <%= current_user.pull_requests.count %></span>
   </div>
+  <div class="col-md-8 detail-stats">
+    <span class="ready">ready: <%= current_user.pull_requests.ready_status %></span>
+    <span class="reviewing">reviewing: <%= current_user.pull_requests.reviewing_status %></span>
+    <span class="commented">commented: <%= current_user.pull_requests.commented_status %></span>
+    <span class="conflicted">conflicted: <%= current_user.pull_requests.conflicted_status %></span>
+    <span class="merged">merged: <%= current_user.pull_requests.merged_status %></span>
+  </div>
+</div>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th class="index">#</th>
+      <th>URL</th>
+      <th class="status">Status</th>
+      <th class="datetime">Created At</th>
+      <th class="datetime">Updated At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pull_requests.each_with_index do |pull_request, index| %>
+      <tr>
+        <td>
+          <%= index_for params[:page] || 1, index, Settings.pull_request.per_page %>
+        </td>
+        <td>
+          <%= link_to pull_request.url_files, pull_request.url_files, target: "_blank" %>
+        </td>
+        <td>
+          <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
+        </td>
+        <td><%= l pull_request.created_at, format: :long %></td>
+        <td><%= l pull_request.updated_at, format: :long %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= paginate @pull_requests, theme: "twitter-bootstrap-4", pagination_class: "pagination-sm" %>
 </div>

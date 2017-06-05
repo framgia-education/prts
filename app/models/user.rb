@@ -56,4 +56,8 @@ class User < ApplicationRecord
   def forget
     update_attributes remember_digest: nil
   end
+
+  scope :number_of_admins, ->{where(role: :admin).size}
+  scope :number_of_trainers, ->{where(role: :trainer).size}
+  scope :number_of_normal_users, ->{where(role: :normal).size}
 end

@@ -138,3 +138,16 @@ $white: #fff;
 .role {
   width: 80px;
 }
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.stats{
+  height: 40px;
+  margin-top: 25px;
+
+  .detail-stats span {
+    font-weight: bold;
+  }
+}

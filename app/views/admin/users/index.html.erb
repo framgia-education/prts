@@ -2,11 +2,22 @@
 
 <h2 class="text-center">Manage Users</h2>
 <p>
-  <%= link_to new_admin_user_path, class: "btn btn-primary btn-sm" do %>
+  <%= link_to new_admin_user_path, class: "btn btn-primary btn-sm qwe" do %>
     <span class="glyphicon glyphicon-plus"></span> New User
   <% end %>
 </p>
-<p class="amount">Number of items: <%= @users_size %></p>
+
+<div class="stats">
+  <div class="col-md-2 row">
+    <span class="amount">Number of items: <%= @support.total_users %></span>
+  </div>
+
+  <div class="col-md-8 detail-stats">
+    <span class="reviewing">admin: <%= @support.number_of_admins %></span>
+    <span class="commented">trainer: <%= @support.number_of_trainers %></span>
+    <span class="conflicted">normal: <%= @support.number_of_normal_users %></span>
+  </div>
+</div>
 
 <table class="table table-hover table-striped">
   <thead>

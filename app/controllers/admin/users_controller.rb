@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :load_user, except: [:index, :new, :create]
 
   def index
-    @users_size = User.count
+    @support = Supports::UserSupport.new
     @users = User.includes(:pull_requests).order(name: :asc)
       .page(params[:page]).per Settings.admin.user.per_page
   end

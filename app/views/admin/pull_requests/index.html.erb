@@ -1,7 +1,19 @@
 <% provide :title, "Manage Pull Requests" %>
 
 <h2 class="text-center">Manage Pull Requests</h2>
-<p class="amount">Number of items: <%= @pull_requests_size %></p>
+<div class="stats">
+  <div class="col-md-2 row">
+    <span class="amount">Number of items: <%= @support.total_pull_requests %></span>
+  </div>
+
+  <div class="col-md-8 detail-stats">
+    <span class="ready">ready: <%= @support.ready_status %></span>
+    <span class="reviewing">reviewing: <%= @support.reviewing_status %></span>
+    <span class="commented">commented: <%= @support.commented_status %></span>
+    <span class="conflicted">conflicted: <%= @support.conflicted_status %></span>
+    <span class="merged">merged: <%= @support.merged_status %></span>
+  </div>
+</div>
 
 <table class="table table-hover table-striped">
   <thead>
@@ -18,7 +30,7 @@
     <% @pull_requests.each_with_index do |pull_request, index| %>
       <tr>
         <td>
-          <%= index_for params[:page] || 1, index, Settings.admin.pull_request.per_page %>
+          <%= index_for params[:page] || 1, index, Settings.pull_request.per_page %>
         </td>
         <td>
           <%= link_to pull_request.url_files, pull_request.url_files, target: "_blank" %>
