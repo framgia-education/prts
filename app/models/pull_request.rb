@@ -1,7 +1,8 @@
 class PullRequest < ApplicationRecord
   paginates_per Settings.pull_request.per_page
 
-  belongs_to :user, primary_key: :github_account, foreign_key: :github_account
+  belongs_to :user, primary_key: :github_account,
+    foreign_key: :github_account, optional: true
 
   validates :url, presence: true
 
@@ -10,6 +11,10 @@ class PullRequest < ApplicationRecord
   after_update :send_message_to_chatwork
 
   delegate :name, to: :user, prefix: true, allow_nil: true
+
+  def url_files
+    url + "/files"
+  end
 
   private
 

@@ -15,24 +15,20 @@
       </tr>
     </thead>
     <tbody>
-      <% if @pull_requests.any? %>
-        <% @pull_requests.each_with_index do |pull_request, index| %>
-          <tr>
-            <td>
-              <% params[:page] ||= "1" %>
-              <%= index_for params[:page], index, Settings.pull_request.per_page %>
-            </td>
-            <td>
-              <% url = pull_request.url + "/files" %>
-              <%= link_to url, url, target: "_blank" %>
-            </td>
-            <td>
-              <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
-            </td>
-            <td><%= l pull_request.created_at, format: :long %></td>
-            <td><%= l pull_request.updated_at, format: :long %></td>
-          </tr>
-        <% end %>
+      <% @pull_requests.each_with_index do |pull_request, index| %>
+        <tr>
+          <td>
+            <%= index_for params[:page] || 1, index, Settings.pull_request.per_page %>
+          </td>
+          <td>
+            <%= link_to pull_request.url_files, pull_request.url_files, target: "_blank" %>
+          </td>
+          <td>
+            <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
+          </td>
+          <td><%= l pull_request.created_at, format: :long %></td>
+          <td><%= l pull_request.updated_at, format: :long %></td>
+        </tr>
       <% end %>
     </tbody>
   </table>
