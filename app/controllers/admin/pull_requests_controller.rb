@@ -3,7 +3,7 @@ class Admin::PullRequestsController < ApplicationController
   before_action :load_pull, only: :update
 
   def index
-    @pull_requests_size = PullRequest.count
+    @support = Supports::PullRequestSupport.new
     @pull_requests = PullRequest.order(updated_at: :desc)
       .page(params[:page])
   end

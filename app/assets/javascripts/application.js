@@ -19,7 +19,8 @@ $(document).on('ready', function(){
     $(this).remove();
   });
 
-  $('span.ready').on('click', function() {
+  $('.pull-status').find('span.ready').on('click', function() {
+    if(confirm('Are you sure?') == false) return false;
     var spanElem = $(this);
     var tdElem = spanElem.parents('.pull-status');
     var form = spanElem.parents('form');
