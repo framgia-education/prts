@@ -1,7 +1,7 @@
 class PullRequestsController < ApplicationController
   def index
-    @pull_requests_size = current_user.pull_requests.count
     @support = Supports::PullRequestSupport.new
+    @support_user = Supports::UserSupport.new
     @pull_requests = current_user.pull_requests.order(updated_at: :desc)
       .page(params[:page])
   end

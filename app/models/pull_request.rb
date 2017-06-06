@@ -8,7 +8,7 @@ class PullRequest < ApplicationRecord
 
   enum status: [:ready, :commented, :conflicted, :reviewing, :merged, :closed]
 
-  after_update :send_message_to_chatwork
+  # after_update :send_message_to_chatwork
 
   delegate :name, to: :user, prefix: true, allow_nil: true
 

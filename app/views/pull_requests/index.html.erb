@@ -1,17 +1,29 @@
 <% provide :title, "List of your pull requests" %>
 
-<h2 class="text-center">List of your pull requests</h2>
+<div>
+  <div class="col-md-6">
+    <h2 class="text-center">List of your pull requests</h2>
 
-<div class="stats">
-  <div class="col-md-2 row">
-    <span class="amount">Number of items: <%= current_user.pull_requests.count %></span>
+    <div class="stats">
+      <div class="col-md-2 row">
+        <span class="amount">Number of items: <%= current_user.pull_requests.count %></span>
+      </div>
+      <div class="col-md-8 detail-stats">
+        <span class="ready">ready: <%= current_user.pull_requests.ready_status %></span>
+        <span class="reviewing">reviewing: <%= current_user.pull_requests.reviewing_status %></span>
+        <span class="commented">commented: <%= current_user.pull_requests.commented_status %></span>
+        <span class="conflicted">conflicted: <%= current_user.pull_requests.conflicted_status %></span>
+        <span class="merged">merged: <%= current_user.pull_requests.merged_status %></span>
+      </div>
+    </div>
   </div>
-  <div class="col-md-8 detail-stats">
-    <span class="ready">ready: <%= current_user.pull_requests.ready_status %></span>
-    <span class="reviewing">reviewing: <%= current_user.pull_requests.reviewing_status %></span>
-    <span class="commented">commented: <%= current_user.pull_requests.commented_status %></span>
-    <span class="conflicted">conflicted: <%= current_user.pull_requests.conflicted_status %></span>
-    <span class="merged">merged: <%= current_user.pull_requests.merged_status %></span>
+
+  <div class="col-md-6">
+    <h4>The most active memebers</h4>
+    <% @support_user.active_members.each do |user| %>
+      <%= user.name %>
+    <% end %>
+
   </div>
 </div>
 
