@@ -19,17 +19,17 @@ $(document).on('ready', function(){
     $(this).remove();
   });
 
-  $('.pull-status').find('span.ready').on('click', function() {
+  $('.pull-status span.ready').on('click', function() {
     if(confirm('Are you sure?') == false) return false;
     var spanElem = $(this);
     var tdElem = spanElem.parents('.pull-status');
     var form = spanElem.parents('form');
 
     $.ajax({
-      url: $('form')[0].action,
-      type: "POST",
+      url: form[0].action,
+      type: 'POST',
       dataType: 'json',
-      data: $('form').serialize(),
+      data: form.serialize(),
       success: function (data) {
         tdElem.html('<span class="' + data.status + '">' + data.status + '</span>')
         var win = window.open(data.url_files, '_blank');
