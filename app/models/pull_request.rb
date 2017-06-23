@@ -10,7 +10,7 @@ class PullRequest < ApplicationRecord
 
   after_update :send_message_to_chatwork
 
-  delegate :name, to: :user, prefix: true, allow_nil: true
+  delegate :name, :github_account, to: :user, prefix: true, allow_nil: true
 
   def url_files
     url + "/files"

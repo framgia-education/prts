@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170522132138) do
+ActiveRecord::Schema.define(version: 20170623123014) do
 
   create_table "pull_requests", force: :cascade do |t|
     t.string   "url"
@@ -28,16 +28,18 @@ ActiveRecord::Schema.define(version: 20170522132138) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.integer  "role",             default: 0
+    t.integer  "role"
     t.string   "provider"
     t.string   "token"
     t.string   "refresh_token"
     t.string   "chatwork_id"
     t.string   "chatwork_room_id"
     t.string   "github_account"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "oauth_token"
     t.index ["github_account"], name: "index_users_on_github_account"
+    t.index ["oauth_token"], name: "index_users_on_oauth_token", unique: true
   end
 
   create_table "white_lists", force: :cascade do |t|

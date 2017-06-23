@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "admin/pull_requests#index", constraints: lambda {|request| RoleConstraint.new(:admin, :trainer).matches?(request)}
+  root "pull_requests#index", constraints: lambda {|request| RoleConstraint.new(:normal).matches?(request)}
   root "omniauth_callbacks#show"
   get "/auth/:provider/callback", to: "omniauth_callbacks#create"
   get "/auth/failure", to: "omniauth_callbacks#failure"
@@ -8,11 +10,16 @@ Rails.application.routes.draw do
   post "/hook", to: "github_hooks#create"
 
   resources :users
-  resources :pull_requests
+  resources :pull_requests, only: [:index, :destroy]
 
   namespace :admin do
     root "pull_requests#index"
     resources :pull_requests
     resources :users
+  end
+
+  namespace :api do
+    get "/extensions/feeds", to: "extensions/feeds#show"
+    get "/extensions/accounts", to: "extensions/accounts#show"
   end
 end
