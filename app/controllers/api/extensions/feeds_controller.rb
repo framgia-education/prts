@@ -12,7 +12,7 @@ module Api
         action_controller.render_to_string(
           partial: "/api/extensions/feeds/new_feeds",
           layout: false,
-          locals: {feeds: PullRequest.all})
+          locals: {feeds: PullRequest.ready.order(updated_at: :desc)})
       end
     end
   end
