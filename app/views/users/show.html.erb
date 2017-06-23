@@ -23,6 +23,18 @@
         <td>Number of pull requests</td>
         <td><%= current_user.pull_requests.size %></td>
       </tr>
+      <% if current_user.trainer? || current_user.admin? %>
+        <tr>
+          <td>API Key</td>
+          <td>
+            <%= current_user.oauth_token %>
+            <%= form_for current_user do |f| %>
+              <%= f.hidden_field :oauth_token, value: User.generate_unique_secure_token %>
+              <button class="btn commented" type="submit">Generate Api Key</button>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </div>

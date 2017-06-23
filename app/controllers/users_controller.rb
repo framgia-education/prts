@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit :chatwork_room_id, :chatwork_id,
-      :github_account
+      :github_account, :oauth_token
   end
 
   def load_user

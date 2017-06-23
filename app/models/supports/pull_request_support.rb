@@ -22,4 +22,8 @@ class Supports::PullRequestSupport
   def merged_status
     PullRequest.merged_status
   end
+
+  def closed_status
+    PullRequest.closed.size
+  end
 end
