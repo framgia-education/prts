@@ -20,7 +20,7 @@ module Api
       end
 
       def limit
-        params[:status] == "ready" ? 1 : 5
+        params[:status] == "ready" ? 1 : 3
       end
     end
   end
