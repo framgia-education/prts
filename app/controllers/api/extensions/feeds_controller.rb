@@ -12,7 +12,15 @@ module Api
         action_controller.render_to_string(
           partial: "/api/extensions/feeds/new_feeds",
           layout: false,
-          locals: {feeds: PullRequest.ready.order(updated_at: :desc)})
+          locals: {
+            feeds: PullRequest.send(params[:status])
+                              .order(updated_at: :desc).limit(limit)
+          }
+        )
+      end
+
+      def limit
+        params[:status] == "ready" ? 1 : 5
       end
     end
   end
