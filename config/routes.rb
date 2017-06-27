@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     get "/extensions/feeds/:status", to: "extensions/feeds#show",
-      constraints: {status: /ready|commented/}
+      constraints: {status: /ready|commented|reviewing/}
     get "/extensions/accounts", to: "extensions/accounts#show"
     post "/extensions/pull_requests/:id",
       to: "extensions/pull_requests#update"
