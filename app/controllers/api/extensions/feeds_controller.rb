@@ -14,7 +14,7 @@ module Api
           layout: false,
           locals: {
             feeds: PullRequest.send(params[:status])
-                              .order(updated_at: :desc).limit(limit)
+                              .order(updated_at: :asc).limit(limit)
           }
         )
       end
