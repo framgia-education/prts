@@ -57,8 +57,8 @@
           <%= index_for params[:page] || 1, index, Settings.pull_request.per_page %>
         </td>
         <td>
-          <%= link_to pull_request.url_files, pull_request.url_files,
-            target: "_blank", title: pull_request.url %>
+          <%= link_to truncate(pull_request.url_files, length: Settings.admin.pull_request.truncate_url),
+            pull_request.url_files, target: "_blank", title: pull_request.url %>
         </td>
         <td><%= pull_request.user_name %></td>
         <td><%= l pull_request.created_at, format: :long %></td>

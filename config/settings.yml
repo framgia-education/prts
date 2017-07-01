@@ -2,6 +2,8 @@ user_guide: "https://docs.google.com/document/d/1AoXzwj6faN1i7KiShvSaeQZ4mPGI2Yc
 admin:
   user:
     per_page: 50
+  pull_request:
+    truncate_url: 50
 pull_request:
   per_page: 50
 active_users: 3
