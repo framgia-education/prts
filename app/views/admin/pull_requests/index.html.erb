@@ -68,7 +68,7 @@
         <% else %>
           <td class="text-center current-reviewer">-</td>
         <% end %>
-        <td class="pull-status">
+        <td class="pull-status pull-request-<%= pull_request.id %>">
           <% if pull_request.ready? %>
             <%= form_for [:admin, pull_request] do |f| %>
               <%= f.hidden_field :status, value: :reviewing %>
