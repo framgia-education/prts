@@ -48,7 +48,7 @@ class HookService
 
     if @merged_pull
       return if pull.status == "merged"
-      pull.merged!
+      pull.update_attributes status: :merged, current_reviewer: nil
       return
     end
 
@@ -60,7 +60,7 @@ class HookService
         (["reviewing", "merged"].include? @comment_body.downcase)
       return if !pull.reviewing? && @comment_body.downcase == "conflicted"
       return if pull.conflicted? && @comment_body.downcase == "commented"
-      pull.update_attributes status: @comment_body.downcase
+      pull.update_attributes status: @comment_body.downcase, current_reviewer: nil
     else
       pull = PullRequest.create url: @pull_request["html_url"],
         repository_name: @repository["name"],
