@@ -10,11 +10,13 @@ class Admin::PullRequestsController < ApplicationController
 
   def update
     respond_to do |format|
+      @pull_request.current_reviewer = current_user.name
       if @pull_request.update pull_request_params
         format.json do
           render json: {
             status: @pull_request.status,
-            url_files: @pull_request.url_files
+            url_files: @pull_request.url_files,
+            current_reviewer: @pull_request.current_reviewer
           }, status: :ok
         end
       else

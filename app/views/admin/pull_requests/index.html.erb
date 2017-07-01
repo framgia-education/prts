@@ -46,6 +46,7 @@
       <th>Created By</th>
       <th class="datetime">Created At</th>
       <th class="datetime">Updated Time</th>
+      <th>Current Reviewer</th>
       <th class="status">Status</th>
     </tr>
   </thead>
@@ -56,11 +57,17 @@
           <%= index_for params[:page] || 1, index, Settings.pull_request.per_page %>
         </td>
         <td>
-          <%= link_to pull_request.url_files, pull_request.url_files, target: "_blank" %>
+          <%= link_to pull_request.url_files, pull_request.url_files,
+            target: "_blank", title: pull_request.url %>
         </td>
         <td><%= pull_request.user_name %></td>
         <td><%= l pull_request.created_at, format: :long %></td>
         <td><%= time_ago_in_words pull_request.updated_at %> ago</td>
+        <% if pull_request.current_reviewer %>
+          <td><%= pull_request.current_reviewer %></td>
+        <% else %>
+          <td class="text-center current-reviewer">-</td>
+        <% end %>
         <td class="pull-status">
           <% if pull_request.ready? %>
             <%= form_for [:admin, pull_request] do |f| %>

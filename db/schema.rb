@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623123014) do
+ActiveRecord::Schema.define(version: 20170701112606) do
 
   create_table "pull_requests", force: :cascade do |t|
     t.string   "url"
-    t.integer  "status",          default: 0
+    t.integer  "status",           default: 0
     t.string   "repository_name"
     t.string   "github_account"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "current_reviewer"
     t.index ["github_account"], name: "index_pull_requests_on_github_account"
     t.index ["status"], name: "index_pull_requests_on_status"
   end
