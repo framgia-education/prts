@@ -1,6 +1,7 @@
+user_guide: "https://docs.google.com/document/d/1AoXzwj6faN1i7KiShvSaeQZ4mPGI2YcUpO70kpedniw/edit?usp=sharing"
 admin:
   user:
     per_page: 50
 pull_request:
   per_page: 50
-user_guide: "https://docs.google.com/document/d/1AoXzwj6faN1i7KiShvSaeQZ4mPGI2YcUpO70kpedniw/edit?usp=sharing"
+active_users: 3

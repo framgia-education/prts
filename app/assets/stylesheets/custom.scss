@@ -80,6 +80,11 @@ $white: #fff;
   background: $merged;
 }
 
+.closed {
+  @extend .status-label;
+  background: $black;
+}
+
 .role-select {
   position: relative;
   select {
@@ -128,7 +133,7 @@ $white: #fff;
 }
 
 .datetime {
-  width: 155px;
+  width: 160px;
 }
 
 .status {
@@ -139,15 +144,19 @@ $white: #fff;
   width: 80px;
 }
 
-.navbar {
-  margin-bottom: 0;
-}
-
 .stats{
   height: 40px;
   margin-top: 25px;
 
   .detail-stats span {
     font-weight: bold;
+  }
+}
+
+.active-members {
+  margin: 15px 0 15px 10px;
+
+  .merged {
+    margin-left: 20px;
   }
 }

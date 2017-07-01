@@ -4,8 +4,8 @@ class Admin::PullRequestsController < ApplicationController
 
   def index
     @support = Supports::PullRequestSupport.new
-    @pull_requests = PullRequest.order(updated_at: :desc)
-      .page params[:page]
+    @support_user = Supports::UserSupport.new
+    @pull_requests = PullRequest.order(updated_at: :desc).page params[:page]
   end
 
   def update

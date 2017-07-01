@@ -39,6 +39,8 @@ class PullRequest < ApplicationRecord
       mess = "Your pull request no. ##{pull_index} is under reviewing.\n#{url}/files"
     when "merged"
       mess = "Your pull request no. ##{pull_index} has been (merged)\n#{url}"
+    when "closed"
+      mess = "Your pull request no. ##{pull_index} has been closed (devil)\n#{url}"
     end
 
     mess += "\n\n#{$remark}" if $remark
