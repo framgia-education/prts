@@ -16,11 +16,7 @@ class PullRequest < ApplicationRecord
     url + "/files"
   end
 
-  scope :ready_status, ->{where(status: :ready).size}
-  scope :reviewing_status, ->{where(status: :reviewing).size}
-  scope :commented_status, ->{where(status: :commented).size}
-  scope :conflicted_status, ->{where(status: :conflicted).size}
-  scope :merged_status, ->{where(status: :merged).size}
+  scope :with_user, -> user{where user: user if user}
 
   private
 

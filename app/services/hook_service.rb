@@ -58,8 +58,8 @@ class HookService
       return if (["ready", "reviewing"].include? pull.status) && @comment_body.downcase == "ready"
       return if (["commented", "conflicted"].include? pull.status) &&
         (["reviewing", "merged"].include? @comment_body.downcase)
-      return if pull.status != "ready" && @comment_body.downcase == "conflicted"
-      return if pull.status == "conflicted" && @comment_body.downcase == "commented"
+      return if !pull.reviewing? && @comment_body.downcase == "conflicted"
+      return if pull.conflicted? && @comment_body.downcase == "commented"
       pull.update_attributes status: @comment_body.downcase
     else
       pull = PullRequest.create url: @pull_request["html_url"],
