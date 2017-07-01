@@ -12,6 +12,7 @@ class Admin::PullRequestsController < ApplicationController
     respond_to do |format|
       @pull_request.current_reviewer = current_user.name
       if @pull_request.update pull_request_params
+        ActionCable.server.broadcast "room_channel_#{ENV["ACTION_CABLE_SECRET"]}", {status: @pull_request.status, id: @pull_request.id}
         format.json do
           render json: {
             status: @pull_request.status,

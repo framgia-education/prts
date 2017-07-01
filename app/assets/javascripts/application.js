@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require cable
 
 $(document).on('ready', function(){
   $('.flash-message').delay(2000).slideUp(500, function(){

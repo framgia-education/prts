@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => "/cable"
   root "admin/pull_requests#index", constraints: lambda {|request| RoleConstraint.new(:admin, :trainer).matches?(request)}
   root "pull_requests#index", constraints: lambda {|request| RoleConstraint.new(:normal).matches?(request)}
   root "omniauth_callbacks#show"
