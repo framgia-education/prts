@@ -5,7 +5,7 @@ class Admin::PullRequestsController < ApplicationController
   def index
     @support = Supports::PullRequestSupport.new
     @pull_requests = PullRequest.order(updated_at: :desc)
-      .page(params[:page])
+      .page params[:page]
   end
 
   def update

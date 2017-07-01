@@ -1,29 +1,35 @@
-class Supports::PullRequestSupport
-  def total_pull_requests
-    PullRequest.count
-  end
+module Supports
+  class PullRequestSupport
+    def initialize user = nil
+      @user = user
+    end
 
-  def ready_status
-    PullRequest.ready_status
-  end
+    def total_pull_requests
+      PullRequest.with_user(@user).count
+    end
 
-  def reviewing_status
-    PullRequest.reviewing_status
-  end
+    def ready_pulls_size
+      PullRequest.ready.with_user(@user).size
+    end
 
-  def commented_status
-    PullRequest.commented_status
-  end
+    def reviewing_pulls_size
+      PullRequest.reviewing.with_user(@user).size
+    end
 
-  def conflicted_status
-    PullRequest.conflicted_status
-  end
+    def commented_pulls_size
+      PullRequest.commented.with_user(@user).size
+    end
 
-  def merged_status
-    PullRequest.merged_status
-  end
+    def conflicted_pulls_size
+      PullRequest.conflicted.with_user(@user).size
+    end
 
-  def closed_status
-    PullRequest.closed.size
+    def merged_pulls_size
+      PullRequest.merged.with_user(@user).size
+    end
+
+    def closed_pulls_size
+      PullRequest.closed.with_user(@user).size
+    end
   end
 end
