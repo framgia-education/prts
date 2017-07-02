@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701112606) do
+ActiveRecord::Schema.define(version: 20170702014348) do
+
+  create_table "offices", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "pull_requests", force: :cascade do |t|
     t.string   "url"
@@ -39,8 +47,10 @@ ActiveRecord::Schema.define(version: 20170701112606) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.string   "oauth_token"
+    t.integer  "office_id"
     t.index ["github_account"], name: "index_users_on_github_account"
     t.index ["oauth_token"], name: "index_users_on_oauth_token", unique: true
+    t.index ["office_id"], name: "index_users_on_office_id"
   end
 
   create_table "white_lists", force: :cascade do |t|

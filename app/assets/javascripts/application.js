@@ -16,7 +16,7 @@
 //= require cable
 
 $(document).on('ready', function(){
-  $('.flash-message').delay(2000).slideUp(500, function(){
+  $('.flash-message').delay(3000).slideUp(500, function(){
     $(this).remove();
   });
 

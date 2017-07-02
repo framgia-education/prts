@@ -9,7 +9,7 @@
 
 <div class="stats">
   <div class="col-md-2 row">
-    <span class="amount">Number of items: <%= @support.total_users %></span>
+    <span class="amount">Total: <%= @support.total_users %></span>
   </div>
 
   <div class="col-md-8 detail-stats">
@@ -25,6 +25,7 @@
       <th class="index">#</th>
       <th>Name</th>
       <th>Email</th>
+      <th>Office</th>
       <th>Number of Pull requests</th>
       <th class="role">Role</th>
       <th>Action</th>
@@ -32,13 +33,14 @@
   </thead>
   <tbody>
     <% @users.each_with_index do |user, index| %>
-      <tbody>
+      <tr>
         <td>
           <% params[:page] ||= "1" %>
           <%= index_for params[:page], index, Settings.admin.user.per_page %>
         </td>
         <td><%= link_to user.name, admin_user_path(user) %></td>
         <td><%= user.email %></td>
+        <td><%= user.office_name.present? ? user.office_name : "N/A" %></td>
         <td><%= user.pull_requests.size %></td>
         <td><span class="<%= user.role %>"><%= user.role %></span></td>
         <td>
@@ -53,7 +55,7 @@
             <% end %>
           <% end %>
         </td>
-      </tbody>
+      </tr>
     <% end %>
   </tbody>
 </table>

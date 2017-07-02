@@ -15,6 +15,10 @@ class Supports::UserSupport
     User.normal.size
   end
 
+  def number_of_non_office_users
+    User.where(office_id: nil).size
+  end
+
   def active_members
     list_account = PullRequest.merged.group(:github_account)
       .limit(Settings.active_users).order("count_id desc").count(:id)

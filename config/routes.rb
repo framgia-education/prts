@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     root "pull_requests#index"
     resources :pull_requests
     resources :users
+    resources :offices
   end
 
   namespace :api do

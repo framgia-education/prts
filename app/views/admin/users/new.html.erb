@@ -1,42 +1,61 @@
 <% provide :title, "Create New User" %>
 
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-8 col-md-offset-2">
+  <div class="col-md-1">
+    <%= link_to admin_users_path, class: "btn btn-info btn-xs", title: "Go back" do %>
+      <span class="glyphicon glyphicon-arrow-left"></span> All users
+    <% end %>
+  </div>
+
   <h2 class="text-center">Create New User</h2>
 
   <%= form_for [:admin, @user] do |f| %>
     <%= render "shared/error_messages", object: f.object %>
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control", required: true %>
-    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", required: true, placeholder: "Name" %>
+      </div>
 
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, class: "form-control", required: true %>
-    </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control", required: true, placeholder: "Email" %>
+      </div>
 
-    <div class="form-group">
-      <%= f.label :role %>
-      <div class="role-select">
-        <%= f.select :role, options_for_select(User.roles.keys), {},
-          class: "form-control" %>
+      <div class="form-group">
+        <%= f.label :office_id, "Office" %>
+        <%= f.select :office_id, options_for_select(@offices.collect{|office| [office.name, office.id]}, params[:office_id]),
+          {include_blank: Settings.admin.user.office_choice.blank_value}, class: "form-control" %>
       </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: "form-control" %>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :role %>
+        <div class="role-select">
+          <%= f.select :role, options_for_select(User.roles.keys), {},
+            class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control", required: true, placeholder: "Password" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: "form-control",
+          required: true, placeholder: "Password Confirmation" %>
+      </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.submit "Create", class: "btn btn-primary" %>
-      &nbsp;
-      <%= f.submit "Create and continue", class: "btn btn-primary", name: "create_and_continue" %>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.submit "Create", class: "btn btn-primary" %>
+        &nbsp;
+        <%= f.submit "Create and continue", class: "btn btn-primary", name: "create_and_continue" %>
+      </div>
     </div>
   <% end %>
 </div>

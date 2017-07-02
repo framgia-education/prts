@@ -160,3 +160,16 @@ $white: #fff;
     margin-left: 20px;
   }
 }
+ textarea{
+  resize: vertical;
+ }
+
+.non-office-users {
+  font-style: italic;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.non-office-user {
+  margin-right: 40px;
+}
