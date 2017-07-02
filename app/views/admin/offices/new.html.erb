@@ -1,0 +1,14 @@
+<% provide :title, "Create New Office" %>
+<% provide :button_text, "Create" %>
+
+<div class="col-md-6 col-md-offset-3">
+  <div>
+    <%= link_to admin_offices_path, class: "btn btn-info btn-xs", title: "Go back" do %>
+      <span class="glyphicon glyphicon-arrow-left"></span> All offices
+    <% end %>
+  </div>
+
+  <h2 class="text-center">Create New Office</h2>
+
+  <%= render "form_office", object: @office %>
+</div>

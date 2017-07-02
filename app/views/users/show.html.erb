@@ -3,7 +3,7 @@
 <div class="col-md-6 col-md-offset-3">
   <h2 class="text-center">Your Profile</h2>
 
-  <table class="table table-stripe table-hover">
+  <table class="table table-striped table-hover">
     <tbody>
       <tr>
         <td>Name</td>
@@ -22,6 +22,19 @@
       <tr>
         <td>Number of pull requests</td>
         <td><%= current_user.pull_requests.size %></td>
+      </tr>
+      <tr>
+        <td>Office</td>
+        <td>
+          <% if current_user.office_name %>
+            <%= current_user.office_name %>
+          <% else %>
+            <span class="non-office-user">N/A</span>
+            <%= link_to edit_user_path do %>
+              <span class="glyphicon glyphicon-hand-right"></span> update your office
+            <% end %>
+          <% end %>
+        </td>
       </tr>
       <% if current_user.trainer? || current_user.admin? %>
         <tr>

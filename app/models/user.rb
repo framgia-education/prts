@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  paginates_per Settings.admin.user.per_page
+
+  belongs_to :office, optional: true
+
   has_many :pull_requests, primary_key: :github_account, foreign_key: :github_account
 
   attr_accessor :remember_token
@@ -12,8 +16,9 @@ class User < ApplicationRecord
 
   enum role: [:normal, :trainer, :admin]
 
-  ATTR_PARAMS = [:id, :name, :email, :password, :role,
-    :chatwork_id, :chatwork_room_id, :github_account].freeze
+  ATTR_PARAMS = [:name, :email, :office_id, :role, :password, :password_confirmation].freeze
+
+  delegate :name, :office_id, to: :office, prefix: true, allow_nil: true
 
   class << self
     def digest string

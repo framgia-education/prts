@@ -3,7 +3,7 @@
 <div class="col-md-6 col-md-offset-3">
   <div>
     <%= link_to admin_users_path, class: "btn btn-info btn-xs", title: "Go back" do %>
-      <span class="glyphicon glyphicon-arrow-left"></span> Go back
+      <span class="glyphicon glyphicon-arrow-left"></span> All users
     <% end %>
 
     <%= link_to edit_admin_user_path(@user), class: "btn btn-warning btn-xs pull-right", title: "Edit" do %>
@@ -13,7 +13,7 @@
 
   <h2 class="text-center">User's Information</h2>
 
-  <table class="table table-stripe table-hover">
+  <table class="table table-striped table-hover">
     <tbody>
       <tr>
         <td>Name</td>
@@ -32,6 +32,10 @@
       <tr>
         <td>Number of pull requests</td>
         <td><%= @user.pull_requests.size %></td>
+      </tr>
+      <tr>
+        <td>Office</td>
+        <td><%= @user.office_name.present? ? @user.office_name : "N/A" %></td>
       </tr>
     </tbody>
   </table>
