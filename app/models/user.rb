@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   ATTR_PARAMS = [:name, :email, :office_id, :role, :password, :password_confirmation].freeze
 
-  delegate :name, :office_id, to: :office, prefix: true, allow_nil: true
+  delegate :name, to: :office, prefix: true, allow_nil: true
 
   class << self
     def digest string
