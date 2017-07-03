@@ -12,8 +12,13 @@
           <% end %>
         </li>
         <% if logged_in? %>
-          <% if current_user.admin? ||current_user.trainer? %>
+          <% if current_user.admin? || current_user.trainer? %>
             <% if current_user.admin? %>
+              <li>
+                <%= link_to admin_offices_path do %>
+                  <span class="glyphicon glyphicon-map-marker"></span> Manage Offices
+                <% end %>
+              </li>
               <li>
                 <%= link_to admin_users_path do %>
                   <span class="glyphicon glyphicon-magnet"></span> Manage Users

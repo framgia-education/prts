@@ -1,0 +1,60 @@
+<% provide :title, "Manage Offices" %>
+
+<h2 class="text-center">Manage Offices</h2>
+<div>
+  <div class="col-md-2">
+    <div class="row">
+      <%= link_to new_admin_office_path, class: "btn btn-primary btn-sm" do %>
+        <span class="glyphicon glyphicon-plus"></span> New Office
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row non-office-users">
+      Number of non-office users: <%= @support_user.number_of_non_office_users %>
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th class="index">#</th>
+      <th>Name</th>
+      <th>Users</th>
+      <th>Pull Requests</th>
+      <th>Address</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @offices.each_with_index do |office, index| %>
+      <tr>
+        <td>
+          <% params[:page] ||= "1" %>
+          <%= index_for params[:page], index, Settings.admin.office.per_page %>
+        </td>
+        <td><%= link_to office.name, admin_office_path(office) %></td>
+        <td><%= office.users.size %></td>
+        <td><%= total_pull_requests office %></td>
+        <td><%= office.address %></td>
+        <td><%= office.description.present? ? office.description : "N/A" %></td>
+        <td>
+          <%= link_to edit_admin_office_path(office), title: "Edit",
+            class: "btn btn-warning btn-xs" do %>
+            <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
+          <%= link_to admin_office_path(office), method: :delete, title: "Delete",
+            class: "btn btn-danger btn-xs", data: {confirm: "Are you sure?"} do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= paginate @offices, theme: "twitter-bootstrap-4", pagination_class: "pagination-sm" %>
+</div>

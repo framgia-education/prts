@@ -17,6 +17,13 @@
       <%= f.label :chatwork_room_id, "Chatwork room ID" %>
       <%= f.text_field :chatwork_room_id, class: "form-control", required: true %>
     </div>
+
+    <div class="form-group">
+      <%= f.label :office_id, "Office" %>
+      <%= f.select :office_id, options_for_select(@offices.collect{|office| [office.name, office.id]}, @user.office_id),
+        {include_blank: Settings.user.office_choice.blank_value}, class: "form-control" %>
+    </div>
+
     <%= f.submit "Update", class: "btn btn-primary" %>
   <% end %>
 </div>

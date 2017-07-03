@@ -25,4 +25,8 @@ class ApplicationController < ActionController::Base
     flash[:notice] = "You need to sign in before continuing"
     redirect_to login_url
   end
+
+  def load_offices
+    @offices = Office.all
+  end
 end
