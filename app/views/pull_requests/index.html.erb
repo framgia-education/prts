@@ -1,12 +1,14 @@
 <% provide :title, "List of your pull requests" %>
 
 <div>
-  <div class="col-md-9">
+  <div class="col-md-8">
     <h2 class="text-center">List of your pull requests</h2>
     <div class="stats">
       <div class="col-md-2">
         <div class="row">
-          <span class="amount">Total: <%= @support.total_pull_requests %></span>
+          <span class="amount">
+            Total: <%= number_with_delimiter @support.total_pull_requests, delimiter: "." %>
+          </span>
         </div>
       </div>
       <div class="col-md-10 detail-stats">
@@ -15,20 +17,24 @@
           <span class="reviewing">reviewing: <%= @support.reviewing_pulls_size %></span>
           <span class="commented">commented: <%= @support.commented_pulls_size %></span>
           <span class="conflicted">conflicted: <%= @support.conflicted_pulls_size %></span>
-          <span class="merged">merged: <%= @support.merged_pulls_size %></span>
           <span class="closed">closed: <%= @support.closed_pulls_size %></span>
+          <span class="merged">merged: <%= number_with_delimiter @support.merged_pulls_size, delimiter: "." %></span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="row">
       <h4>The most active memebers <%= image_tag "buoyant.gif" %></h4>
       <div class="active-members">
         <% @support_user.active_members.each do |user| %>
           <p>
-            <%= image_tag "flower.gif" %><%= user.name %>
+            <%= image_tag "flower.gif" %>
+            <span class="username"><%= user.name %></span>
+            <% if user.office_name %>
+              - <%= user.office_name %>
+            <% end %>
             <span class="merged"><%= user.merged_pulls_size %></span>
           </p>
         <% end %>
