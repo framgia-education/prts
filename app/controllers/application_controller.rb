@@ -8,13 +8,13 @@ class ApplicationController < ActionController::Base
 
   def verify_admin!
     return if current_user.admin?
-    flash[:alert] = "Access denied!"
+    flash[:alert] = "Oops!!! Access denied!"
     redirect_to root_url
   end
 
   def verify_trainer!
     return if current_user.admin? || current_user.trainer?
-    flash[:alert] = "Access denied!"
+    flash[:alert] = "Oops!!! Access denied!"
     redirect_to root_url
   end
 
@@ -28,5 +28,10 @@ class ApplicationController < ActionController::Base
 
   def load_offices
     @offices = Office.all
+  end
+
+  def load_office_current_user
+    return unless current_user.office
+    params[:office_id] = current_user.office.id
   end
 end

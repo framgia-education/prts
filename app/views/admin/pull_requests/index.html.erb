@@ -1,35 +1,50 @@
 <% provide :title, "Manage Pull Requests" %>
 
-<div>
-  <div class="col-md-9">
+<div class="items-overview">
+  <div class="col-md-8">
     <h2 class="text-center">Manage Pull Requests</h2>
     <div class="stats">
       <div class="col-md-2">
         <div class="row">
-          <span class="amount">Total: <%= @support.total_pull_requests %></span>
+          <span class="amount">
+            Total: <%= number_with_delimiter @support.total_pull_requests, delimiter: "." %>
+          </span>
         </div>
       </div>
 
-      <div class="col-md-10 detail-stats">
+      <div class="col-md-6 detail-stats">
         <div class="row">
           <span class="ready">ready: <%= @support.ready_pulls_size %></span>
           <span class="reviewing">reviewing: <%= @support.reviewing_pulls_size %></span>
           <span class="commented">commented: <%= @support.commented_pulls_size %></span>
+          <br><br>
           <span class="conflicted">conflicted: <%= @support.conflicted_pulls_size %></span>
-          <span class="merged">merged: <%= @support.merged_pulls_size %></span>
           <span class="closed">closed: <%= @support.closed_pulls_size %></span>
+          <span class="merged">merged: <%= number_with_delimiter @support.merged_pulls_size, delimiter: "." %></span>
         </div>
+      </div>
+
+      <div class="col-md-3 col-md-offset-1">
+        <%= form_tag admin_pull_requests_path, method: :get do %>
+          <%= label_tag :office_id, "Office" %>
+          <%= select_tag :office_id, options_for_select(@offices.collect{|office| [office.name, office.id]}, params[:office_id]),
+            include_blank: "All", class: "form-control office-classification" %>
+        <% end %>
       </div>
     </div>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="row">
       <h4>The most active memebers <%= image_tag "buoyant.gif" %></h4>
       <div class="active-members">
         <% @support_user.active_members.each do |user| %>
           <p>
-            <%= image_tag "flower.gif" %><%= user.name %>
+            <%= image_tag "flower.gif" %>
+            <span class="username"><%= user.name %></span>
+            <% if user.office_name %>
+              - <%= user.office_name %>
+            <% end %>
             <span class="merged"><%= user.merged_pulls_size %></span>
           </p>
         <% end %>
