@@ -156,6 +156,11 @@ $white: #fff;
 .active-members {
   margin: 15px 0 15px 10px;
 
+  .username {
+    font-weight: bold;
+    margin-left: 5px;
+  }
+
   .merged {
     margin-left: 20px;
   }
@@ -172,4 +177,13 @@ $white: #fff;
 
 .non-office-user {
   margin-right: 40px;
+}
+
+.items-overview:after {
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+  margin-bottom: 30px;
 }

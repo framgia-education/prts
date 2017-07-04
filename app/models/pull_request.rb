@@ -17,6 +17,9 @@ class PullRequest < ApplicationRecord
   end
 
   scope :with_user, -> user{where user: user if user}
+  scope :of_office, -> office_id do
+    joins(:user).where("office_id = ?", office_id) if office_id.present?
+  end
 
   private
 

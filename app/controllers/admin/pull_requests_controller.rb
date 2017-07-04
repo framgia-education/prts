@@ -1,11 +1,13 @@
 class Admin::PullRequestsController < ApplicationController
   before_action :verify_trainer!
   before_action :load_pull, only: :update
+  before_action :load_offices, only: :index
 
   def index
-    @support = Supports::PullRequestSupport.new
+    load_office_current_user unless params[:office_id]
+    @support = Supports::PullRequestSupport.new params[:office_id]
     @support_user = Supports::UserSupport.new
-    @pull_requests = PullRequest.order(updated_at: :desc).page params[:page]
+    @pull_requests = PullRequest.order(updated_at: :desc).of_office(params[:office_id]).page params[:page]
   end
 
   def update

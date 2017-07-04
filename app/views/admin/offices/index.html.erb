@@ -24,7 +24,6 @@
       <th>Users</th>
       <th>Pull Requests</th>
       <th>Address</th>
-      <th>Description</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -32,14 +31,12 @@
     <% @offices.each_with_index do |office, index| %>
       <tr>
         <td>
-          <% params[:page] ||= "1" %>
-          <%= index_for params[:page], index, Settings.admin.office.per_page %>
+          <%= index_for params[:page] || 1, index, Settings.admin.office.per_page %>
         </td>
         <td><%= link_to office.name, admin_office_path(office) %></td>
         <td><%= office.users.size %></td>
         <td><%= total_pull_requests office %></td>
         <td><%= office.address %></td>
-        <td><%= office.description.present? ? office.description : "N/A" %></td>
         <td>
           <%= link_to edit_admin_office_path(office), title: "Edit",
             class: "btn btn-warning btn-xs" do %>
