@@ -7,7 +7,7 @@
       <th>Created By</th>
       <th class="datetime">Created At</th>
       <th class="datetime">Updated Time</th>
-      <th class="current-reviewer">Current Reviewer</th>
+      <th class="th-current-reviewer">Current Reviewer</th>
       <th class="status">Status</th>
     </tr>
   </thead>
@@ -26,7 +26,7 @@
         <td><%= l pull_request.created_at, format: :long %></td>
         <td class="updated-time"><%= time_ago_in_words pull_request.updated_at %> ago</td>
         <% if pull_request.current_reviewer %>
-          <td><%= pull_request.current_reviewer %></td>
+          <td class="current-reviewer"><%= pull_request.current_reviewer %></td>
         <% else %>
           <td class="text-center current-reviewer">-</td>
         <% end %>

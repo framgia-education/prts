@@ -64,11 +64,11 @@
           <%= link_to pull_request.url_files, pull_request.url_files, target: "_blank" %>
         </td>
         <td><%= pull_request.repository_name %></td>
-        <td>
+        <td class="pull-request-<%= pull_request.id %>">
           <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
         </td>
         <td><%= l pull_request.created_at, format: :long %></td>
-        <td><%= time_ago_in_words pull_request.updated_at %> ago</td>
+        <td class="updated-time"><%= time_ago_in_words pull_request.updated_at %> ago</td>
       </tr>
     <% end %>
   </tbody>
