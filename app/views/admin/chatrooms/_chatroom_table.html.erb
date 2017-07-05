@@ -1,0 +1,16 @@
+<tr>
+  <td><%= index + 1 %></td>
+  <td><%= chatroom.name %></td>
+  <td><%= chatroom.chatroom_id %></td>
+  <td>
+    <%= link_to edit_admin_chatroom_path(chatroom), title: "Edit",
+      class: "btn btn-warning btn-xs btn-edit-chatroom",
+      data: {toggle: "modal", target: "#edit-chatroom", backdrop: "static"} do %>
+      <span class="glyphicon glyphicon-edit"></span>
+    <% end %>
+    <%= link_to admin_chatroom_path(chatroom), method: :delete,
+      class: "btn btn-danger btn-xs", title: "Delete", data: {confirm: "Are you sure?"} do %>
+      <span class="glyphicon glyphicon-trash"></span>
+    <% end %>
+  </td>
+</tr>

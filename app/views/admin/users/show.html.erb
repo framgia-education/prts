@@ -6,8 +6,11 @@
       <span class="glyphicon glyphicon-arrow-left"></span> All users
     <% end %>
 
-    <%= link_to edit_admin_user_path(@user), class: "btn btn-warning btn-xs pull-right", title: "Edit" do %>
-      <span class="glyphicon glyphicon-edit"></span>
+    <% if current_user.admin? %>
+      <%= link_to edit_admin_user_path(@user),
+        class: "btn btn-warning btn-xs pull-right", title: "Edit" do %>
+        <span class="glyphicon glyphicon-edit"></span>
+      <% end %>
     <% end %>
   </div>
 

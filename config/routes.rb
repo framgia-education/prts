@@ -10,14 +10,16 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   post "/hook", to: "github_hooks#create"
 
-  resources :users
+  resources :users, only: [:show, :edit, :update]
   resources :pull_requests, only: [:index, :destroy]
 
   namespace :admin do
     root "pull_requests#index"
-    resources :pull_requests
+    resources :pull_requests, only: [:index, :update]
     resources :users
     resources :offices
+    resources :chatrooms, except: [:new, :show]
+    resources :messages, only: [:new, :create]
   end
 
   namespace :api do

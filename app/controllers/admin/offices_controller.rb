@@ -1,5 +1,6 @@
 class Admin::OfficesController < ApplicationController
-  before_action :verify_admin!
+  before_action :verify_trainer!, only: [:index, :show]
+  before_action :verify_admin!, except: [:index, :show]
   before_action :load_office, except: [:index, :new, :create]
 
   def index

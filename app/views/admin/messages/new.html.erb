@@ -1,0 +1,48 @@
+<div class="col-md-5 decoration-syntax">
+  <h4 class="text-center">Message Decoration Syntaxes</h4>
+  <div>
+    <p class="rule">[hr]</p>
+    <p class="output"><span class="horizontal-line"></span></p>
+  </div>
+
+  <div>
+    <p class="rule">[info]content[/info]</p>
+    <p class="output"><span class="info">content</span></p>
+  </div>
+
+  <div>
+    <p class="rule">[info][title]header[/title]content[/info]</p>
+    <p class="output">
+      <span class="info-title">
+        <span class="header"><span class="info-icon">i</span> header</span>
+        <span class="content">content</span>
+      </span>
+    </p>
+  </div>
+
+  <div>
+    <p class="rule">[code]:)[/code]</p>
+    <p class="output"><span class="code">: )</span></p>
+  </div>
+</div>
+
+<div class="col-md-7">
+  <%= form_tag admin_messages_path do %>
+    <div class="form-group select-chatroom">
+      <%= label_tag :chatroom_id, "Chatroom" %>
+      <%= select_tag :chatroom_id, options_for_select(@chatrooms
+        .collect{|chatroom| [chatroom.name, chatroom.chatroom_id]}),
+        include_blank: "--- select chatroom ---", class: "form-control", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag :message, "Message" %>
+      <%= text_area_tag :message, "", rows: 15, class: "form-control input-message-area",
+        placeholder: "Enter message here" %>
+    </div>
+
+    <%= submit_tag "Send", class: "btn btn-primary" %>
+  <% end %>
+
+  <div id="mention-result" style="border: 1px solid black; width: 500px; height: 100px; clear: both; margin-top: 10px;"></div>
+</div>
