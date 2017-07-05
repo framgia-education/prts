@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require cable
+//= require_tree ./admin
 
 $(document).on('ready', function(){
   $('.flash-message').delay(3000).slideUp(500, function(){
@@ -49,4 +50,21 @@ $(document).on('ready', function(){
   $('.office-classification').on('change', function(){
     $(this).closest('form').submit();
   })
+
+  // $('body').on('click', '.btn-edit-chatrom', function(e){
+  //   // alert($(this).attr('href'));
+    // e.preventDefault();
+    // $('#edit-chatroom').css('display', 'block');
+  //   $.ajax({
+  //     dataType: 'html',
+  //     url: $(this).attr('href'),
+  //     method: 'get',
+  //     success: function(data) {
+  //       $('.modal-content-chatroom').html(data);
+  //     },
+  //     error: function() {
+  //       alert('Oops!!! Cannot edit this chatroom!')
+  //     }
+  //   })
+  // })
 })

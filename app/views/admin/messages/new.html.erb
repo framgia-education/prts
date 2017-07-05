@@ -1,0 +1,13 @@
+<%= form_tag admin_messages_path do %>
+  <%= select_tag :chatroom_id, options_for_select(@chatrooms.collect{|chatroom| [chatroom.name, chatroom.chatroom_id]}),
+    include_blank: "--- select chatroom ---", class: "form-control", required: true %>
+
+  <% @users.each do |user| %>
+    <%= check_box_tag "username_#{user.id}", user.chatwork_id, false %>
+    <%= label_tag "username_#{user.id}", user.name %>
+    <br>
+  <% end %>
+
+  <%= text_area_tag :message, "", rows: 10, class: "form-control" %>
+  <%= submit_tag "Send", class: "btn btn-primary" %>
+<% end %>

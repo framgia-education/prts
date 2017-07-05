@@ -1,0 +1,13 @@
+<%= form_for [:admin, @chatroom] do |f| %>
+  <div class="modal-body">
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name, class: "form-control" %>
+
+    <%= f.label :chatroom_id, "Chatroom ID" %>
+    <%= f.text_field :chatroom_id, class: "form-control" %>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <%= f.submit "Update", class: "btn btn-primary" %>
+  </div>
+<% end %>

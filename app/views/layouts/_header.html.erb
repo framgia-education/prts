@@ -15,19 +15,29 @@
           <% if current_user.admin? || current_user.trainer? %>
             <% if current_user.admin? %>
               <li>
+                <%= link_to new_admin_message_path do %>
+                  New Messge
+                <% end %>
+              </li>
+              <li>
+                <%= link_to admin_chatrooms_path do %>
+                  <span class="glyphicon glyphicon-comment"></span> Chatrooms
+                <% end %>
+              </li>
+              <li>
                 <%= link_to admin_offices_path do %>
-                  <span class="glyphicon glyphicon-map-marker"></span> Manage Offices
+                  <span class="glyphicon glyphicon-map-marker"></span> Offices
                 <% end %>
               </li>
               <li>
                 <%= link_to admin_users_path do %>
-                  <span class="glyphicon glyphicon-magnet"></span> Manage Users
+                  <span class="glyphicon glyphicon-magnet"></span> Users
                 <% end %>
               </li>
             <% end %>
             <li>
               <%= link_to admin_pull_requests_path do %>
-                <span class="glyphicon glyphicon-list-alt"></span> Manage Pull Requests
+                <span class="glyphicon glyphicon-list-alt"></span> Pull Requests
               <% end %>
             </li>
           <% end %>
