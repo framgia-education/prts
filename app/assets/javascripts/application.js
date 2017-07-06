@@ -50,21 +50,4 @@ $(document).on('ready', function(){
   $('.office-classification').on('change', function(){
     $(this).closest('form').submit();
   })
-
-  // $('body').on('click', '.btn-edit-chatrom', function(e){
-  //   // alert($(this).attr('href'));
-    // e.preventDefault();
-    // $('#edit-chatroom').css('display', 'block');
-  //   $.ajax({
-  //     dataType: 'html',
-  //     url: $(this).attr('href'),
-  //     method: 'get',
-  //     success: function(data) {
-  //       $('.modal-content-chatroom').html(data);
-  //     },
-  //     error: function() {
-  //       alert('Oops!!! Cannot edit this chatroom!')
-  //     }
-  //   })
-  // })
 })

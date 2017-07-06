@@ -1,0 +1,10 @@
+$('ul.errors').html('');
+
+<% if @chatroom.errors.any? %>
+  <% @chatroom.errors.full_messages.each do |message| %>
+    $('ul.errors').append($('<li />').html('<%= message.html_safe %>'));
+  <% end %>
+<% else %>
+  $('.chatroom-index').html('<%= j render "index" %>');
+  $('#edit-chatroom').modal('hide');
+<% end %>

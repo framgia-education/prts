@@ -3,59 +3,19 @@
 <h2 class="text-center">Manage Chatrooms</h2>
 
 <div class="col-md-8 col-md-offset-2">
-  <%= form_for [:admin, @chatroom] do |f| %>
-    <table class="table striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Chatroom ID</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @chatrooms.any? %>
-          <% @chatrooms.each_with_index do |chatroom, index| %>
-            <tr>
-              <td><%= index + 1 %></td>
-              <td><%= chatroom.name %></td>
-              <td><%= chatroom.chatroom_id %></td>
-              <td>
-                <%= link_to edit_admin_chatroom_path(chatroom), class: "btn btn-warning btn-xs btn-edit-chatroom",
-                  title: "Edit", data: {toggle: "modal", target: "#edit-chatroom"}  do %>
-                  <span class="glyphicon glyphicon-edit"></span>
-                <% end %>
-                <%= link_to admin_chatroom_path(chatroom), method: :delete,
-                  class: "btn btn-danger btn-xs", title: "Delete", data: {confirm: "Are you sure?"} do %>
-                  <span class="glyphicon glyphicon-trash"></span>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        <% end %>
-        <tr class="new-chatroom-row">
-          <td></td>
-          <td><%= f.text_field :name, class: "form-control", placeholder: "Name" %></td>
-          <td><%= f.text_field :chatroom_id, class: "form-control", placeholder: "Chatroom ID" %></td>
-          <td><%= f.submit "Add", class: "btn btn-primary btn-new-chatroom", disabled: :disabled %></td>
-        </tr>
-      </tbody>
-    </table>
-  <% end %>
+  <table class="table striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Chatroom ID</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="chatroom-index">
+      <%= render "index" %>
+    </tbody>
+  </table>
 </div>
 
-<div class="modal fade" id="edit-chatroom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Edit Chatroom</h4>
-      </div>
-      <div class="modal-content-chatroom">
-
-      </div>
-    </div>
-  </div>
-</div>
+<div class="modal fade" id="edit-chatroom"></div>

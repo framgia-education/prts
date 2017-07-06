@@ -1,6 +1,6 @@
 class Admin::ChatroomsController < ApplicationController
   before_action :verify_admin!
-  before_action :load_chatroom, only: [:edit, :destroy]
+  before_action :load_chatroom, only: [:edit, :update, :destroy]
 
   def index
     @chatrooms = Chatroom.all
@@ -18,14 +18,17 @@ class Admin::ChatroomsController < ApplicationController
     redirect_to admin_chatrooms_url
   end
 
-  def edit
-    # byebug
-    respond_to do |format|
-      format.html{render partial: "chatroom_form", locals: {chatroom: @chatroom}}
-    end
-  end
+  def edit; end
 
   def update
+    @chatrooms = Chatroom.all
+    @chatroom.update_attributes chatroom_params
+    # if @chatroom.update_attributes chatroom_params
+    #   flash.now[:success] = "Update chatroom success!"
+    # else
+    #   flash.now[:alert] = "Oops!!! Update chatroom failed"
+    # end
+    @chatroom = Chatroom.new
   end
 
   def destroy

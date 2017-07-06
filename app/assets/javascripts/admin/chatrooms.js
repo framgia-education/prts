@@ -10,21 +10,17 @@ $(document).on('ready', function(){
     }
   })
 
-  $('body').on('click', '.btn-edit-chatroom', function(e){
-
-    // alert($(this).attr('href'));
-    // e.preventDefault();
-    // $('#edit-chatroom').css('display', 'block');
-    $.ajax({
-      dataType: 'html',
-      url: $(this).attr('href'),
-      method: 'get',
-      success: function(data) {
-        $('.modal-content-chatroom').html(data);
-      },
-      error: function() {
-        alert('Oops!!! Cannot edit this chatroom!')
-      }
-    })
-  })
+  // $('body').on('click', '.btn-edit-chatroom', function(e){
+  //   $.ajax({
+  //     dataType: 'html',
+  //     url: $(this).attr('href'),
+  //     method: 'get',
+  //     success: function(data) {
+  //       $('.modal-content-chatroom').html(data);
+  //     },
+  //     error: function() {
+  //       alert('Oops!!! Cannot edit this chatroom!')
+  //     }
+  //   })
+  // })
 })
