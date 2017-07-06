@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :pull_requests
     resources :users
     resources :offices
+    resources :chatrooms
+    resources :messages
   end
 
   namespace :api do

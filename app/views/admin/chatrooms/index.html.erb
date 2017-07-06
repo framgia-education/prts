@@ -1,0 +1,21 @@
+<% provide :title, "Manage Chatrooms" %>
+
+<h2 class="text-center">Manage Chatrooms</h2>
+
+<div class="col-md-8 col-md-offset-2">
+  <table class="table striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Chatroom ID</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="chatroom-index">
+      <%= render "index" %>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="edit-chatroom"></div>
