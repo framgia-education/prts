@@ -31,6 +31,8 @@ class PullRequest < ApplicationRecord
       Time.now.beginning_of_month, Time.now.end_of_month
   end
 
+  scope :by_statuses, -> statuses{where status: statuses}
+
   private
 
   def send_message_to_chatwork
