@@ -58,6 +58,6 @@ class User < ApplicationRecord
   end
 
   def merged_pulls_size
-    pull_requests.merged.size
+    pull_requests.merged.in_current_month.size
   end
 end
