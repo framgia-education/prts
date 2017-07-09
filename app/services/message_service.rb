@@ -8,5 +8,6 @@ class MessageService
     @message.gsub! /\[Quote/, "[qt]\\0"
     @message.gsub! "[Quote", "[qtmeta"
     @message.gsub! "[/Quote]", "[/qt]"
+    @message
   end
 end
