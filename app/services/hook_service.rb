@@ -49,6 +49,7 @@ class HookService
     if @merged_pull
       return if pull.status == "merged"
       pull.update_attributes status: :merged, current_reviewer: nil
+      ActionCable.server.broadcast "room_channel_#{ENV["ACTION_CABLE_SECRET"]}", {status: pull.status, id: pull.id}
       return
     end
 
@@ -61,6 +62,7 @@ class HookService
       return if !pull.reviewing? && @comment_body.downcase == "conflicted"
       return if pull.conflicted? && @comment_body.downcase == "commented"
       pull.update_attributes status: @comment_body.downcase, current_reviewer: nil
+      ActionCable.server.broadcast "room_channel_#{ENV["ACTION_CABLE_SECRET"]}", {status: pull.status, id: pull.id}
     else
       pull = PullRequest.create url: @pull_request["html_url"],
         repository_name: @repository["name"],
