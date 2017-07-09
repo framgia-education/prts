@@ -7,7 +7,11 @@ $black: #000;
 $blue: #00f;
 $commented: #30c352;
 $conflicted: #6a737d;
+$dark: #333;
+$gray: #4b4a48;
+$light-gray: #90918d;
 $merged: #6f42c1;
+$purple: #9d00ff;
 $ready: #fbbc05;
 $red: #f00;
 $reviewing: #ea4335;
@@ -186,4 +190,93 @@ $white: #fff;
   height: 0;
   visibility: hidden;
   margin-bottom: 30px;
+}
+
+.btn-new-message {
+  margin-top: 8px;
+}
+
+.error {
+  margin: 10px 10px 0;
+}
+
+.admin-non-office-user {
+  background: $purple;
+  border-radius: 2px;
+  color: $white;
+  font-weight: 600;
+  padding: 3px 10px;
+}
+
+.select-chatroom {
+  width: 400px;
+}
+
+.decoration-syntax {
+  background: $dark;
+  color: $white;
+
+  h4 {
+    color: #ffad28;
+  }
+
+  div {
+    margin-bottom: 20px;
+
+    .rule {
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .output {
+      background: $gray;
+      color: $white;
+      padding: 20px 10px;
+
+      .horizontal-line {
+        border-top: 1px solid $light-gray;
+        display: block;
+      }
+
+      .info {
+        border-radius: 3px;
+        border: 1px solid $light-gray;
+        display: block;
+        padding: 3px 3px 3px 10px;
+      }
+
+      .info-title {
+        border-radius: 3px;
+        border: 1px solid $light-gray;
+        display: block;
+
+        .header {
+          border-bottom: 1px solid $light-gray;
+          display: block;
+          padding: 3px 3px 3px 10px;
+
+          .info-icon {
+            border-radius: 50%;
+            border: 2px solid $white;
+            font-size: smaller;
+            font-weight: 900;
+            padding: 0px 5px;
+          }
+        }
+
+        .content {
+          display: block;
+          padding: 3px 3px 3px 10px;
+        }
+      }
+
+      .code {
+        background: $light-gray;
+        border-radius: 3px;
+        display: block;
+        font-weight: 600;
+        padding: 7px 7px 7px 10px;
+      }
+    }
+  }
 }

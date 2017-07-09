@@ -24,7 +24,8 @@
 
       <div class="form-group">
         <%= f.label :office_id, "Office" %>
-        <%= f.select :office_id, options_for_select(@offices.collect{|office| [office.name, office.id]}, params[:office_id]),
+        <%= f.select :office_id, options_for_select(@offices
+          .collect{|office| [office.name, office.id]}, params[:office_id]),
           {include_blank: Settings.admin.user.office_choice.blank_value}, class: "form-control" %>
       </div>
     </div>

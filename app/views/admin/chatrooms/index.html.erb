@@ -1,0 +1,39 @@
+<% provide :title, "Manage Chatrooms" %>
+
+<h2 class="text-center">Manage Chatrooms</h2>
+
+<div class="col-md-8 col-md-offset-2">
+  <%= form_for [:admin, @chatroom] do |f| %>
+    <table class="table striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Chatroom ID</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @chatrooms.any? %>
+          <% @chatrooms.each_with_index do |chatroom, index| %>
+            <tr>
+              <%= render partial: "chatroom_table", locals: {chatroom: chatroom, index: index} %>
+            </tr>
+          <% end %>
+        <% end %>
+        <tr class="new-chatroom-row">
+          <td></td>
+          <td><%= f.text_field :name, class: "form-control", placeholder: "Name" %></td>
+          <td><%= f.text_field :chatroom_id, class: "form-control", placeholder: "Chatroom ID" %></td>
+          <td><%= f.submit "Add", class: "btn btn-primary btn-new-chatroom", disabled: :disabled %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+<div class="modal fade" id="edit-chatroom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>

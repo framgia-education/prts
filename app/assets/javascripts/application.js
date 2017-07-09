@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require cable
+//= require_tree ./admin
 
 $(document).on('ready', function(){
   $('.flash-message').delay(3000).slideUp(500, function(){

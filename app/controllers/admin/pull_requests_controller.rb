@@ -7,7 +7,8 @@ class Admin::PullRequestsController < ApplicationController
     load_office_current_user unless params[:office_id]
     @support = Supports::PullRequestSupport.new params[:office_id]
     @support_user = Supports::UserSupport.new
-    @pull_requests = PullRequest.order(updated_at: :desc).of_office(params[:office_id]).page params[:page]
+    @pull_requests = PullRequest.order(updated_at: :desc)
+      .of_office(params[:office_id]).page params[:page]
   end
 
   def update

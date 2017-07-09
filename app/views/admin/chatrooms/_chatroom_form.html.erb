@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title" id="myModalLabel">Edit Chatroom</h4>
+</div>
+
+<%= form_for [:admin, @chatroom] do |f| %>
+  <div class="error"></div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <%= f.label :name, "Name" %>
+      <%= f.text_field :name, class: "form-control edit-chatroom-name" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :chatroom_id, "Chatroom ID" %>
+      <%= f.text_field :chatroom_id, class: "form-control edit-chatroom-id" %>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <%= f.submit "Update", class: "btn btn-primary btn-update-chatroom" %>
+  </div>
+<% end %>

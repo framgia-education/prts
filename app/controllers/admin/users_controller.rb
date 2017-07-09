@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
-  before_action :verify_admin!
+  before_action :verify_trainer!, only: [:index, :show]
+  before_action :verify_admin!, except: [:index, :show]
   before_action :load_user, except: [:index, :new, :create]
   before_action :load_offices, except: [:index, :show, :destroy]
 
@@ -26,8 +27,7 @@ class Admin::UsersController < ApplicationController
 
   def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update_attributes user_params

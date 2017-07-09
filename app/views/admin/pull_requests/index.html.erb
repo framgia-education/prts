@@ -27,7 +27,8 @@
       <div class="col-md-3 col-md-offset-1">
         <%= form_tag admin_pull_requests_path, method: :get do %>
           <%= label_tag :office_id, "Office" %>
-          <%= select_tag :office_id, options_for_select(@offices.collect{|office| [office.name, office.id]}, params[:office_id]),
+          <%= select_tag :office_id, options_for_select(@offices
+            .collect{|office| [office.name, office.id]}, params[:office_id]),
             include_blank: "All", class: "form-control office-classification" %>
         <% end %>
       </div>
