@@ -8,31 +8,58 @@ class HookService
     @action = @payload["action"]
 
     Rails.logger.info "---------------------------> #{@action}"
-    if @action == "closed" && @payload["pull_request"]["merged"]
-      @merged_pull = true
-      @pull_request = @payload["pull_request"]
-    elsif @action == "created"
+
+    # if @action == "closed" && @payload["pull_request"]["merged"]
+    #   @merged_pull = "merged"
+    #   @pull_request = @payload["pull_request"]
+    # elsif @action == "closed" && !@payload["pull_request"]["merged"]
+    #   @merged_pull = "closed"
+    #   @pull_request = @payload["pull_request"]
+    # elsif @action == "reopened"
+    #   @merged_pull = "reopened"
+    #   @pull_request = @payload["pull_request"]
+    # elsif @action == "created"
+    #   @repository = @payload["repository"]
+    #   @comment = @payload["comment"]
+    #   @owner = @payload["issue"]["user"]
+    #   @sender = @payload["sender"]
+    #   @pull_request = @payload["issue"]["pull_request"]
+    #   @comment_body = @comment["body"]
+    # end
+
+    if @action == "created"
       @repository = @payload["repository"]
       @comment = @payload["comment"]
       @owner = @payload["issue"]["user"]
       @sender = @payload["sender"]
       @pull_request = @payload["issue"]["pull_request"]
       @comment_body = @comment["body"]
+    else
+      if @action == "closed"
+        if @payload["pull_request"]["merged"]
+          @merged_pull = "merged"
+        else
+          @merged_pull = "closed"
+        end
+      else
+        @merged_pull = "reopened"
+      end
+      @pull_request = @payload["pull_request"]
     end
   end
 
   def valid?
     return false if ["assigned", "unassigned", "review_requested",
       "review_request_removed", "labeled", "unlabeled", "opened", "edited",
-      "reopened", "submitted", "deleted", "synchronize", "dismissed"].include?(@action)
+      "submitted", "deleted", "synchronize", "dismissed"].include?(@action)
 
     return true if @merged_pull
 
-    if @comment_body && @comment_body.include?("-")
-      $bracket = @comment_body.split("-").third
-      $remark = @comment_body.split("-").second
-      $remark = "(" + $remark + ")" unless $bracket == "no"
-      @comment_body = @comment_body.split("-").first.downcase
+    if @comment_body && @comment_body.include?("\r\n")
+      temp = @comment_body.split "\r\n"
+      temp.shift
+      $remark = temp.join "\r\n"
+      @comment_body = @comment_body.split("\r\n").first.downcase
     end
 
     return false unless MESSAGES_VALID.include?(@comment_body)
@@ -48,12 +75,20 @@ class HookService
 
     if @merged_pull
       return if pull.status == "merged"
-      pull.update_attributes status: :merged, current_reviewer: nil
+
+      if @merged_pull == "merged"
+        pull.update_attributes status: :merged, current_reviewer: nil
+      elsif @merged_pull == "closed"
+        pull.update_attributes status: :closed, current_reviewer: nil
+      else
+        pull.update_attributes status: :commented, current_reviewer: nil
+      end
+
       return
     end
 
     if pull.present?
-      return if pull.merged?
+      return if pull.merged? || pull.closed?
       return if @comment_body.downcase == pull.status
       return if (["ready", "reviewing"].include? pull.status) && @comment_body.downcase == "ready"
       return if (["commented", "conflicted"].include? pull.status) &&
