@@ -1,14 +1,14 @@
 class Admin::PullRequestsController < ApplicationController
   before_action :verify_trainer!
   before_action :load_pull, only: :update
-  before_action :load_offices, only: :index
+  before_action :load_offices, :load_pulls_by_statuses, only: :index
 
   def index
     load_office_current_user unless params[:office_id]
     @support = Supports::PullRequestSupport.new params[:office_id]
     @support_user = Supports::UserSupport.new
-    @pull_requests = PullRequest.order(updated_at: :desc)
-      .of_office(params[:office_id]).page params[:page]
+    @pull_requests = PullRequest.order(updated_at: :desc).of_office(params[:office_id])
+      .by_statuses(params[:status]).page params[:page]
   end
 
   def update
@@ -45,5 +45,10 @@ class Admin::PullRequestsController < ApplicationController
 
     flash[:notice] = "Not found pull request with id #{params[:id]}"
     redirect_to admin_pull_requests_path
+  end
+
+  def load_pulls_by_statuses
+    params[:status].present? ? params[:status] :
+      params[:status] = Settings.pull_request.default_statuses
   end
 end

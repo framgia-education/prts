@@ -10,6 +10,7 @@ admin:
     per_page: 10
 pull_request:
   per_page: 50
+  default_statuses: ["ready", "reviewing", "commented", "conflicted", "closed"]
 active_users: 3
 user:
   office_choice:

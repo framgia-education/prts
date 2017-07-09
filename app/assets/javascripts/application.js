@@ -46,8 +46,4 @@ $(document).on('ready', function(){
       }
     });
   });
-
-  $('.office-classification').on('change', function(){
-    $(this).closest('form').submit();
-  })
 })
