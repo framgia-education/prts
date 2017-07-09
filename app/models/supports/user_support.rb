@@ -20,7 +20,7 @@ class Supports::UserSupport
   end
 
   def active_members
-    list_account = PullRequest.merged.group(:github_account)
+    list_account = PullRequest.merged.in_current_month.group(:github_account)
       .limit(Settings.active_users).order("count_id desc").count(:id)
     User.where(github_account: list_account.keys)
       .sort_by{|user| list_account.keys.index user.github_account}
