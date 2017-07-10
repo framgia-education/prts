@@ -289,53 +289,37 @@ $white: #fff;
 
   label[for='ready'] {
     background: $ready;
-
-    &:hover {
-      box-shadow: 0 0 15px $merged;
-    }
   }
 
   label[for='reviewing'] {
     background: $reviewing;
-
-    &:hover {
-      box-shadow: 0 0 15px $merged;
-    }
   }
 
   label[for='commented'] {
     background: $commented;
-
-    &:hover {
-      box-shadow: 0 0 15px $reviewing;
-    }
   }
 
   label[for='conflicted'] {
     background: $conflicted;
-
-    &:hover {
-      box-shadow: 0 0 15px $reviewing;
-    }
   }
 
   label[for='closed'] {
     background: $black;
-
-    &:hover {
-      box-shadow: 0 0 15px $conflicted;
-    }
   }
 
   label[for='merged'] {
     background: $merged;
-
-    &:hover {
-      box-shadow: 0 0 15px $conflicted;
-    }
   }
 }
 
-.btn-filter-pull-requests {
-  width: 60%;
+.filter-by-office {
+  margin: 10px 10px 10px -30px;
+
+  td:first-child {
+    width: 60px;
+  }
+
+  td:nth-child(2) {
+    width: 200px;
+  }
 }
