@@ -20,6 +20,11 @@ class User < ApplicationRecord
 
   delegate :name, to: :office, prefix: true, allow_nil: true
 
+  scope :search, lambda{|keyword|
+    where "name LIKE ? OR email LIKE ? OR github_account LIKE ?",
+      "%#{keyword}%", "%#{keyword}%", "%#{keyword}%" if keyword.present?
+  }
+
   class << self
     def digest string
       cost = ActiveModel::SecurePassword.min_cost ?
