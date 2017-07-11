@@ -6,7 +6,8 @@ class Admin::UsersController < ApplicationController
 
   def index
     @support = Supports::UserSupport.new
-    @users = User.includes(:pull_requests).order(created_at: :desc).page params[:page]
+    @users = User.includes(:pull_requests).search(params[:search])
+      .order(created_at: :desc).page params[:page]
   end
 
   def new

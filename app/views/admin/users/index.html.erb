@@ -2,23 +2,38 @@
 
 <h2 class="text-center">Manage Users</h2>
 
-<% if current_user.admin? %>
-  <p>
-    <%= link_to new_admin_user_path, class: "btn btn-primary btn-sm" do %>
-      <span class="glyphicon glyphicon-plus"></span> New User
-    <% end %>
-  </p>
-<% end %>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="row">
+        <% if current_user.admin? %>
+          <%= link_to new_admin_user_path, class: "btn btn-primary btn-sm" do %>
+            <span class="glyphicon glyphicon-plus"></span> New User
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-<div class="stats">
-  <div class="col-md-2 row">
-    <span class="amount">Total: <%= @support.total_users %></span>
+    <div class="col-md-6 col-md-offset-1">
+      <%= form_tag admin_users_path, method: :get do %>
+        <%= text_field_tag :search, params[:search], class: "form-control",
+          placeholder: "Search by name, email or github account" %>
+      <% end %>
+    </div>
   </div>
+</div>
 
-  <div class="col-md-8 detail-stats">
-    <span class="reviewing">admin: <%= @support.number_of_admins %></span>
-    <span class="commented">trainer: <%= @support.number_of_trainers %></span>
-    <span class="conflicted">normal: <%= @support.number_of_normal_users %></span>
+<div class="stats col-md-12">
+  <div class="row">
+    <div class="col-md-2 row">
+      <span class="amount">Total: <%= @support.total_users %></span>
+    </div>
+
+    <div class="col-md-8 detail-stats">
+      <span class="reviewing">admin: <%= @support.number_of_admins %></span>
+      <span class="commented">trainer: <%= @support.number_of_trainers %></span>
+      <span class="conflicted">normal: <%= @support.number_of_normal_users %></span>
+    </div>
   </div>
 </div>
 
