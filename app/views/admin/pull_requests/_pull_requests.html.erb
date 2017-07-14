@@ -1,0 +1,51 @@
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th class="index">#</th>
+      <th>Url</th>
+      <th>Created By</th>
+      <th class="datetime">Created At</th>
+      <th class="datetime">Updated Time</th>
+      <th>Current Reviewer</th>
+      <th class="status">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pull_requests.each_with_index do |pull_request, index| %>
+      <tr>
+        <td>
+          <%= index_for params[:page] || 1, index, Settings.pull_request.per_page %>
+        </td>
+        <td>
+          <%= link_to truncate(pull_request.url_files, length: Settings.admin.pull_request.truncate_url),
+            pull_request.url_files, target: "_blank", title: pull_request.url %>
+        </td>
+        <td><%= pull_request.user_name %></td>
+        <td><%= l pull_request.created_at, format: :long %></td>
+        <td><%= time_ago_in_words pull_request.updated_at %> ago</td>
+        <% if pull_request.current_reviewer %>
+          <td><%= pull_request.current_reviewer %></td>
+        <% else %>
+          <td class="text-center current-reviewer">-</td>
+        <% end %>
+        <td class="pull-status pull-request-<%= pull_request.id %>">
+          <% if pull_request.ready? %>
+            <%= form_for [:admin, pull_request] do |f| %>
+              <%= f.hidden_field :status, value: :reviewing %>
+              <span role="button" class="ready">
+                <%= pull_request.status %>
+              </span>
+            <% end %>
+          <% else %>
+            <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= paginate @pull_requests, theme: "twitter-bootstrap-4",
+    pagination_class: "pagination-sm", remote: true %>
+</div>

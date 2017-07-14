@@ -3,75 +3,8 @@
 <div class="items-overview">
   <h2 class="text-center">Manage Pull Requests</h2>
   <div class="col-md-8">
-    <div class="stats">
-      <div>
-        <div class="row">
-          <span class="amount">
-            Total: <%= number_with_delimiter @support.total_pull_requests, delimiter: "." %>
-          </span>
-        </div>
-      </div>
-
-      <div class="col-md-12">
-        <div class="row">
-          <%= form_tag admin_pull_requests_path, method: :get do %>
-            <div class="col-md-12">
-              <table class="filter-by-office">
-                <tr>
-                  <td><%= label_tag :office_id, "Office" %></td>
-                  <td>
-                    <%= select_tag :office_id, options_for_select(@offices
-                      .collect{|office| [office.name, office.id]}, params[:office_id]),
-                      include_blank: "All", class: "form-control" %>
-                  </td>
-                  <td><%= submit_tag "Filter", class: "btn btn-primary" %></td>
-                </tr>
-              </table>
-            </div>
-
-            <div class="detail-stats">
-              <div class="row">
-                <label for="ready" role="button">
-                  <%= check_box_tag "status[]", :ready, nil, id: :ready,
-                    checked: (params[:status].include? "ready") %>
-                  <span class="ready">ready: <%= @support.ready_pulls_size %></span>
-                </label>
-
-                <label for="reviewing" role=button>
-                  <%= check_box_tag "status[]", :reviewing, nil, id: :reviewing,
-                    checked: (params[:status].include? "reviewing") %>
-                  <span class="reviewing">reviewing: <%= @support.reviewing_pulls_size %></span>
-                </label>
-
-                <label for="commented" role="button">
-                  <%= check_box_tag "status[]", :commented, nil, id: :commented,
-                    checked: (params[:status].include? "commented") %>
-                  <span class="commented">commented: <%= @support.commented_pulls_size %></span>
-                </label>
-
-                <label for="conflicted" role="button">
-                  <%= check_box_tag "status[]", :conflicted, nil, id: :conflicted,
-                    checked: (params[:status].include? "conflicted") %>
-                  <span class="conflicted">conflicted: <%= @support.conflicted_pulls_size %></span>
-                </label>
-
-                <label for="closed" role="button">
-                  <%= check_box_tag "status[]", :closed, nil, id: :closed,
-                    checked: (params[:status].include? "closed") %>
-                  <span class="closed">closed: <%= @support.closed_pulls_size %></span>
-                </label>
-
-                <label for="merged" role="button">
-                  <%= check_box_tag "status[]", :merged, nil, id: :merged,
-                    checked: (params[:status].include? "merged") %>
-                  <span class="merged">merged: <%= number_with_delimiter @support
-                    .merged_pulls_size, delimiter: "." %></span>
-                </label>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
+    <div class="stats admin-pull-requests-stat">
+      <%= render "stat", support: @support, offices: @offices %>
     </div>
   </div>
 
@@ -94,53 +27,6 @@
   </div>
 </div>
 
-<table class="table table-hover table-striped">
-  <thead>
-    <tr>
-      <th class="index">#</th>
-      <th>Url</th>
-      <th>Created By</th>
-      <th class="datetime">Created At</th>
-      <th class="datetime">Updated Time</th>
-      <th>Current Reviewer</th>
-      <th class="status">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @pull_requests.each_with_index do |pull_request, index| %>
-      <tr>
-        <td>
-          <%= index_for params[:page] || 1, index, Settings.pull_request.per_page %>
-        </td>
-        <td>
-          <%= link_to truncate(pull_request.url_files, length: Settings.admin.pull_request.truncate_url),
-            pull_request.url_files, target: "_blank", title: pull_request.url %>
-        </td>
-        <td><%= pull_request.user_name %></td>
-        <td><%= l pull_request.created_at, format: :long %></td>
-        <td><%= time_ago_in_words pull_request.updated_at %> ago</td>
-        <% if pull_request.current_reviewer %>
-          <td><%= pull_request.current_reviewer %></td>
-        <% else %>
-          <td class="text-center current-reviewer">-</td>
-        <% end %>
-        <td class="pull-status pull-request-<%= pull_request.id %>">
-          <% if pull_request.ready? %>
-            <%= form_for [:admin, pull_request] do |f| %>
-              <%= f.hidden_field :status, value: :reviewing %>
-              <span role="button" class="ready">
-                <%= pull_request.status %>
-              </span>
-            <% end %>
-          <% else %>
-            <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<div class="text-center">
-  <%= paginate @pull_requests, theme: "twitter-bootstrap-4", pagination_class: "pagination-sm" %>
+<div class="admin-pull-requests-table">
+  <%= render "pull_requests" %>
 </div>

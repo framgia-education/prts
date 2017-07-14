@@ -8,6 +8,7 @@ $blue: #00f;
 $commented: #30c352;
 $conflicted: #6a737d;
 $dark: #333;
+$dark-green: #023a0d;
 $gray: #4b4a48;
 $light-gray: #90918d;
 $merged: #6f42c1;
@@ -169,9 +170,10 @@ $white: #fff;
     margin-left: 20px;
   }
 }
- textarea{
+
+textarea {
   resize: vertical;
- }
+}
 
 .non-office-users {
   font-style: italic;
@@ -321,5 +323,20 @@ $white: #fff;
 
   td:nth-child(2) {
     width: 200px;
+  }
+}
+
+.select-all-statuses {
+  margin-right: 20px;
+}
+
+.select-all-statuses,
+.unselect-all-statuses {
+  font-style: italic;
+  color: $blue;
+  text-decoration: underline;
+
+  &:hover {
+    color: $dark-green;
   }
 }
