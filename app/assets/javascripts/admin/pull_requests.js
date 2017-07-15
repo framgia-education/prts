@@ -29,7 +29,15 @@ $(document).ready(function(){
     $(this).closest('form').submit();
   })
 
-  $('body').on('click', '.pull-request-status-label label[role=button]', function(e){
+  $('body').on('change', '.repository-classification', function(){
+    $(this).closest('form').submit();
+  })
+
+  $('body').on('change', '.github-account-classification', function(){
+    $(this).closest('form').submit();
+  })
+
+  $('body').on('click', '.pull-request-status-label label[role=button]', function(){
     $(this).closest('form').submit();
   })
 

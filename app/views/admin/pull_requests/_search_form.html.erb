@@ -1,0 +1,69 @@
+<div class="form-group">
+  <div class="search-pull-request">
+    <div class="row">
+      <table>
+        <tr>
+          <td><%= label_tag :url, "URL" %></td>
+          <td>
+            <%= text_field_tag :url, "", class: "form-control",
+              placeholder: "Enter pull request's URL" %>
+          </td>
+          <td>
+            <%= submit_tag "Search", class: "btn btn-primary btn-search-pull-request" %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="filter-by-multi-condition">
+    <div class="row">
+      <div class="condition">
+        <table>
+          <tr>
+            <td>
+              <%= label_tag :office_id, "Office" %>
+            </td>
+            <td>
+              <%= select_tag :office_id, options_for_select(@offices
+                .collect{|office| [office.name, office.id]}, params[:office_id]),
+                include_blank: "-- Select All --", class: "form-control office-classification chosen-select" %>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="condition">
+        <table>
+          <tr>
+            <td>
+              <%= label_tag :repository, "Repository" %>
+            </td>
+            <td>
+              <%= select_tag :repository, options_for_select(@support_pull_request.repositories
+                .collect{|object| [object.repository_name, object.repository_name]}, params[:repository]),
+                include_blank: "-- Select All --", class: "form-control repository-classification chosen-select" %>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="condition">
+        <table>
+          <tr>
+            <td>
+              <%= label_tag :github_account, "Github Account" %>
+            </td>
+            <td>
+              <%= select_tag :github_account, options_for_select(@support_user.github_accounts
+                .collect{|object| [object.github_account, object.github_account]}, params[:github_account]),
+                include_blank: "-- Select All --", class: "form-control github-account-classification chosen-select" %>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

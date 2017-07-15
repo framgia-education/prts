@@ -11,10 +11,12 @@ class Admin::PullRequestsController < ApplicationController
     end
 
     load_office_current_user unless params[:office_id]
-    @support = Supports::PullRequestSupport.new params[:office_id]
+    @support_pull_request = Supports::PullRequestSupport
+      .new params[:office_id], nil, params[:url], params[:repository], params[:github_account]
     @support_user = Supports::UserSupport.new
-    @pull_requests = PullRequest.order(updated_at: :desc).of_office(params[:office_id])
-      .by_statuses(params[:status]).page params[:page]
+    @pull_requests = PullRequest.order(updated_at: :desc).by_statuses(params[:status])
+      .select_with_multi_conditions(params[:office_id], nil, params[:url],
+        params[:repository], params[:github_account]).page params[:page]
   end
 
   def update

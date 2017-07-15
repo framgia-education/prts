@@ -2,11 +2,12 @@
   <thead>
     <tr>
       <th class="index">#</th>
-      <th>Url</th>
+      <th>URL</th>
+      <th>Repository</th>
       <th>Created By</th>
       <th class="datetime">Created At</th>
       <th class="datetime">Updated Time</th>
-      <th>Current Reviewer</th>
+      <th class="current-reviewer">Current Reviewer</th>
       <th class="status">Status</th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
           <%= link_to truncate(pull_request.url_files, length: Settings.admin.pull_request.truncate_url),
             pull_request.url_files, target: "_blank", title: pull_request.url %>
         </td>
+        <td><%= pull_request.repository_name %></td>
         <td><%= pull_request.user_name %></td>
         <td><%= l pull_request.created_at, format: :long %></td>
         <td><%= time_ago_in_words pull_request.updated_at %> ago</td>

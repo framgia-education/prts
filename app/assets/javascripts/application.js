@@ -13,11 +13,21 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require chosen-jquery
 //= require cable
 //= require_tree ./admin
+
+function set_up_chosen() {
+  $('.chosen-select').chosen({
+    allow_single_deselect: true,
+    width: '160px'
+  });
+}
 
 $(document).on('ready', function(){
   $('.flash-message').delay(3000).slideUp(500, function(){
     $(this).remove();
   });
+
+  set_up_chosen();
 })
