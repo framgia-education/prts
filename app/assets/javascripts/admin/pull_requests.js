@@ -6,6 +6,7 @@ $(document).ready(function(){
     var form = spanElem.parents('form');
     var tr = form.parents('td').parents('tr');
     var current_reviewer = tr.children('td.current-reviewer');
+    var updated_time = tr.children('td.updated-time');
 
     $.ajax({
       url: form[0].action,
@@ -16,6 +17,7 @@ $(document).ready(function(){
         tdElem.html('<span class="' + data.status + '">' + data.status + '</span>');
         current_reviewer.removeClass('text-center');
         current_reviewer.html(data.current_reviewer);
+        updated_time.html("less than a minute ago");
         var win = window.open(data.url_files, '_blank');
         win.focus();
       },

@@ -1,5 +1,5 @@
 class Admin::PullRequestsController < ApplicationController
-  before_action :verify_trainer!
+  before_action :verify_supporter!
   before_action :load_pull, only: :update
   before_action :load_offices, only: :index
 
@@ -51,7 +51,6 @@ class Admin::PullRequestsController < ApplicationController
   def load_pull
     @pull_request = PullRequest.find_by id: params[:id]
     return if @pull_request
-
     flash[:notice] = "Not found pull request with id #{params[:id]}"
     redirect_to admin_pull_requests_path
   end

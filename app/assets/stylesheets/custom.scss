@@ -10,6 +10,7 @@ $conflicted: #6a737d;
 $dark: #333;
 $dark-green: #023a0d;
 $gray: #4b4a48;
+$gray-green: #06a018;
 $light-gray: #90918d;
 $merged: #6f42c1;
 $purple: #9d00ff;
@@ -102,6 +103,26 @@ h4 {
   background: $black;
 }
 
+.admin-user {
+  @extend .status-label;
+  background: $red;
+}
+
+.trainer-user {
+  @extend .status-label;
+  background: $blue;
+}
+
+.supporter-user {
+  @extend .status-label;
+  background: $gray-green;
+}
+
+.normal-user {
+  @extend .status-label;
+  background: $merged;
+}
+
 .role-select {
   position: relative;
   select {
@@ -142,6 +163,11 @@ h4 {
 
 .admin {
   color: $red;
+  font-weight: bold;
+}
+
+.supporter {
+  color: $gray-green;
   font-weight: bold;
 }
 

@@ -11,6 +11,10 @@ class Supports::UserSupport
     User.trainer.size
   end
 
+  def number_of_supporters
+    User.supporter.size
+  end
+
   def number_of_normal_users
     User.normal.size
   end

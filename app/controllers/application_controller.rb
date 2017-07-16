@@ -18,6 +18,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
+  def verify_supporter!
+    return unless current_user.normal?
+    flash[:alert] = "Oops!!! Access denied!"
+    redirect_to root_url
+  end
+
   def authenticate_user!
     return if current_user.present?
     store_location
