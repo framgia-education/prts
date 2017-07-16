@@ -25,4 +25,8 @@ class Supports::UserSupport
     User.where(github_account: list_account.keys)
       .sort_by{|user| list_account.keys.index user.github_account}
   end
+
+  def github_accounts
+    User.select :github_account
+  end
 end

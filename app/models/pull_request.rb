@@ -16,22 +16,35 @@ class PullRequest < ApplicationRecord
     url + "/files"
   end
 
-  scope :with_user, -> user{where user: user if user}
-
-  scope :of_office, -> office_id do
-    joins(:user).where("office_id = ?", office_id) if office_id.present?
-  end
-
-  scope :select_with_user_office, -> user, office_id do
-    with_user(user).of_office office_id
-  end
-
   scope :in_current_month, -> do
     where "updated_at > ? AND updated_at < ?",
       Time.now.beginning_of_month, Time.now.end_of_month
   end
 
   scope :by_statuses, -> statuses{where status: statuses}
+
+  scope :of_office, -> office_id do
+    joins(:user).where("office_id = ?", office_id) if office_id.present?
+  end
+
+  scope :with_user, -> user{where user: user if user}
+
+  scope :with_url, lambda{|url|
+    where "url LIKE ?", "%#{url}%" if url.present?
+  }
+
+  scope :of_repository, lambda{|repository|
+    where "repository_name = '#{repository}'" if repository.present?
+  }
+
+  scope :of_github_account, lambda{|github_account|
+    where "pull_requests.github_account = '#{github_account}'" if github_account.present?
+  }
+
+  scope :select_with_multi_conditions, -> office_id, user, url, repository, github_account do
+    of_office(office_id).with_user(user).with_url(url)
+      .of_repository(repository).of_github_account(github_account)
+  end
 
   private
 

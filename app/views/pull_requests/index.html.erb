@@ -48,6 +48,7 @@
     <tr>
       <th class="index">#</th>
       <th>URL</th>
+      <th>Repository</th>
       <th class="status">Status</th>
       <th class="datetime">Created At</th>
       <th class="datetime">Updated Time</th>
@@ -62,6 +63,7 @@
         <td>
           <%= link_to pull_request.url_files, pull_request.url_files, target: "_blank" %>
         </td>
+        <td><%= pull_request.repository_name %></td>
         <td>
           <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
         </td>

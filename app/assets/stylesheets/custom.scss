@@ -19,6 +19,18 @@ $reviewing: #ea4335;
 $silver-color: #bbb;
 $white: #fff;
 
+h2 {
+  margin-top: 0;
+}
+
+h4 {
+  margin: 0;
+}
+
+.panel-body {
+  padding: 0;
+}
+
 .checkbox {
   margin-top: -10px;
   margin-bottom: 10px;
@@ -141,6 +153,10 @@ $white: #fff;
   width: 160px;
 }
 
+.current-reviewer {
+  min-width: 150px;
+}
+
 .status {
   width: 115px;
 }
@@ -159,16 +175,21 @@ $white: #fff;
 }
 
 .active-members {
-  margin: 15px 0 15px 10px;
+  margin: 15px 0 15px 30px;
 
-  .username {
-    font-weight: bold;
-    margin-left: 5px;
+  p {
+    margin-bottom: 25px;
+
+    .username {
+      font-weight: bold;
+      margin-left: 5px;
+    }
+
+    .merged {
+      margin-left: 20px;
+    }
   }
 
-  .merged {
-    margin-left: 20px;
-  }
 }
 
 textarea {
@@ -194,6 +215,10 @@ textarea {
   margin-bottom: 30px;
 }
 
+.admin-pull-requests-stat {
+  margin-top: 20px;
+}
+
 .btn-new-message {
   margin-top: 8px;
 }
@@ -217,6 +242,7 @@ textarea {
 .decoration-syntax {
   background: $dark;
   color: $white;
+  padding-top: 20px;
 
   h4 {
     color: #ffad28;
@@ -314,15 +340,39 @@ textarea {
   }
 }
 
-.filter-by-office {
-  margin: 10px 10px 10px -30px;
-
-  td:first-child {
-    width: 60px;
+.filter-by-multi-condition {
+  .condition {
+    float: left;
   }
 
-  td:nth-child(2) {
-    width: 200px;
+  table {
+    margin-right: 40px;
+
+    tr {
+      td:first-child {
+        padding-right: 10px;
+      }
+    }
+  }
+}
+
+.search-pull-request {
+  table {
+    tr {
+      td:first-child {
+        padding-right: 21px;
+      }
+
+      td:nth-child(2) {
+        width: 350px;
+      }
+    }
+  }
+}
+
+.statistics {
+  label {
+    margin-right: 8px;
   }
 }
 
@@ -338,5 +388,12 @@ textarea {
 
   &:hover {
     color: $dark-green;
+  }
+}
+
+.pull-request-status-label {
+  input[type=checkbox] {
+    height: 15px;
+    width: 15px;
   }
 }

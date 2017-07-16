@@ -4,25 +4,22 @@
   <h2 class="text-center">Manage Pull Requests</h2>
   <div class="col-md-8">
     <div class="stats admin-pull-requests-stat">
-      <%= render "stat", support: @support, offices: @offices %>
+      <div class="col-md-12">
+        <div class="row">
+          <%= form_tag admin_pull_requests_path, method: :get, remote: true do %>
+            <%= render "search_form" %>
+
+            <div class="statistics">
+              <%= render "stat" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-
   <div class="col-md-4">
     <div class="row">
-      <h4>The most active memebers this month <%= image_tag "buoyant.gif" %></h4>
-      <div class="active-members">
-        <% @support_user.active_members.each do |user| %>
-          <p>
-            <%= image_tag "flower.gif" %>
-            <span class="username"><%= user.name %></span>
-            <% if user.office_name %>
-              - <%= user.office_name %>
-            <% end %>
-            <span class="merged"><%= user.merged_pulls_size %></span>
-          </p>
-        <% end %>
-      </div>
+      <%= render "active_member" %>
     </div>
   </div>
 </div>
