@@ -11,7 +11,12 @@ class OmniauthCallbacksController < ApplicationController
     else
       flash[:notice] = "Oops!!! Auth failure"
     end
-    redirect_to root_path
+
+    if @user.admin? || @user.trainer?
+      redirect_to admin_pull_requests_url
+    else
+      redirect_to root_path
+    end
   end
 
   def show; end
