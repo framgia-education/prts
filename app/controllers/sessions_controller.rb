@@ -12,9 +12,9 @@ class SessionsController < ApplicationController
       log_in @user
       params[:session][:remember_me] == "1" ? remember(@user) : forget(@user)
       flash[:success] = "Welcome back!"
-      # redirect_back_or @user
-      if @user.admin?
-        redirect_back_or admin_root_url
+
+      if @user.admin? || @user.trainer?
+        redirect_to admin_pull_requests_url
       else
         redirect_back_or root_url
       end

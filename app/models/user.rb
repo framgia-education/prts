@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
-  enum role: [:normal, :trainer, :admin]
+  enum role: [:normal, :trainer, :admin, :supporter]
 
   ATTR_PARAMS = [:name, :email, :office_id, :role, :password, :password_confirmation].freeze
 

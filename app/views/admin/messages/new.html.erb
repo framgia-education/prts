@@ -35,7 +35,7 @@
         <%= label_tag :chatroom_id, "Chatroom" %>
         <%= select_tag :chatroom_id, options_for_select(@chatrooms
           .collect{|chatroom| [chatroom.name, chatroom.chatroom_id]}),
-          include_blank: "--- select chatroom ---", class: "form-control", required: true %>
+          include_blank: "--- Select Chatroom ---", class: "form-control", required: true %>
       </div>
 
       <div class="form-group">

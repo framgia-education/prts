@@ -12,7 +12,7 @@
           <% end %>
         </li>
         <% if logged_in? %>
-          <% if current_user.admin? || current_user.trainer? %>
+          <% unless current_user.normal? %>
             <% if current_user.admin? %>
               <li>
                 <%= link_to admin_chatrooms_path do %>
@@ -20,24 +20,28 @@
                 <% end %>
               </li>
             <% end %>
-            <li>
-              <%= link_to admin_offices_path do %>
-                <span class="glyphicon glyphicon-map-marker"></span> Offices
-              <% end %>
-            </li>
-            <li>
-              <%= link_to admin_users_path do %>
-                <span class="glyphicon glyphicon-magnet"></span> Users
-              <% end %>
-            </li>
+            <% if current_user.admin? || current_user.trainer? %>
+              <li>
+                <%= link_to admin_offices_path do %>
+                  <span class="glyphicon glyphicon-map-marker"></span> Offices
+                <% end %>
+              </li>
+              <li>
+                <%= link_to admin_users_path do %>
+                  <span class="glyphicon glyphicon-magnet"></span> Users
+                <% end %>
+              </li>
+            <% end %>
             <li>
               <%= link_to admin_pull_requests_path do %>
                 <span class="glyphicon glyphicon-list-alt"></span> Pull Requests
               <% end %>
             </li>
-            <li>
-              <%= button_tag "New Message", class: "btn btn-primary btn-new-message" %>
-            </li>
+            <% if current_user.admin? || current_user.trainer? %>
+              <li>
+                <%= button_tag "New Message", class: "btn btn-primary btn-new-message" %>
+              </li>
+            <% end %>
           <% end %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

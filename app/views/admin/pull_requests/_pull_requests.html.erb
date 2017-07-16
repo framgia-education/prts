@@ -24,7 +24,7 @@
         <td><%= pull_request.repository_name %></td>
         <td><%= pull_request.user_name %></td>
         <td><%= l pull_request.created_at, format: :long %></td>
-        <td><%= time_ago_in_words pull_request.updated_at %> ago</td>
+        <td class="updated-time"><%= time_ago_in_words pull_request.updated_at %> ago</td>
         <% if pull_request.current_reviewer %>
           <td><%= pull_request.current_reviewer %></td>
         <% else %>
@@ -48,6 +48,6 @@
 </table>
 
 <div class="text-center">
-  <%= paginate @pull_requests, theme: "twitter-bootstrap-4",
+  <%= paginate @pull_requests, left: 1, right: 2, theme: "twitter-bootstrap-4",
     pagination_class: "pagination-sm", remote: true %>
 </div>

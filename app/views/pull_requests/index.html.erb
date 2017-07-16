@@ -75,5 +75,6 @@
 </table>
 
 <div class="text-center">
-  <%= paginate @pull_requests, theme: "twitter-bootstrap-4", pagination_class: "pagination-sm" %>
+  <%= paginate @pull_requests, left: 1, right: 2,
+    theme: "twitter-bootstrap-4", pagination_class: "pagination-sm" %>
 </div>
