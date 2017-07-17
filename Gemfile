@@ -19,6 +19,7 @@ gem "kaminari"
 gem "omniauth-hrsystem", git: "https://github.com/dieunb/omniauth-hrsystem.git"
 gem "puma", "~> 3.0"
 gem "rails", "~> 5.0.2"
+gem "redis"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
 
