@@ -84,6 +84,8 @@ class HookService
         pull.update_attributes status: :commented, current_reviewer: nil
       end
 
+      ActionCable.server.broadcast "room_channel_#{ENV["ACTION_CABLE_SECRET"]}",
+        {status: pull.status, id: pull.id, current_reviewer: pull.current_reviewer}
       return
     end
 
@@ -96,6 +98,8 @@ class HookService
       return if !pull.reviewing? && @comment_body.downcase == "conflicted"
       return if pull.conflicted? && @comment_body.downcase == "commented"
       pull.update_attributes status: @comment_body.downcase, current_reviewer: nil
+      ActionCable.server.broadcast "room_channel_#{ENV["ACTION_CABLE_SECRET"]}",
+        {status: pull.status, id: pull.id, current_reviewer: pull.current_reviewer}
     else
       pull = PullRequest.create url: @pull_request["html_url"],
         repository_name: @repository["name"],

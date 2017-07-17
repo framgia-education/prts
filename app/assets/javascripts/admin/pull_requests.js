@@ -17,6 +17,7 @@ $(document).ready(function(){
         tdElem.html('<span class="' + data.status + '">' + data.status + '</span>');
         current_reviewer.removeClass('text-center');
         current_reviewer.html(data.current_reviewer);
+        tdElem.attr('ready-to-reviewing', 1);
         updated_time.html("less than a minute ago");
         var win = window.open(data.url_files, '_blank');
         win.focus();
