@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705145230) do
+ActiveRecord::Schema.define(version: 20170719130703) do
 
   create_table "chatrooms", force: :cascade do |t|
     t.string   "name"
@@ -29,12 +29,13 @@ ActiveRecord::Schema.define(version: 20170705145230) do
 
   create_table "pull_requests", force: :cascade do |t|
     t.string   "url"
-    t.integer  "status",           default: 0
+    t.integer  "status",             default: 0
     t.string   "repository_name"
     t.string   "github_account"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "current_reviewer"
+    t.integer  "number_of_comments"
     t.index ["github_account"], name: "index_pull_requests_on_github_account"
     t.index ["status"], name: "index_pull_requests_on_status"
   end

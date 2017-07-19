@@ -34,6 +34,8 @@ class HookService
       @sender = @payload["sender"]
       @pull_request = @payload["issue"]["pull_request"]
       @comment_body = @comment["body"]
+      @number_of_comments = @payload["issue"]["comments"]
+      # byebug
     else
       if @action == "closed"
         if @payload["pull_request"]["merged"]
@@ -97,14 +99,17 @@ class HookService
         (["reviewing", "merged"].include? @comment_body.downcase)
       return if !pull.reviewing? && @comment_body.downcase == "conflicted"
       return if pull.conflicted? && @comment_body.downcase == "commented"
-      pull.update_attributes status: @comment_body.downcase, current_reviewer: nil
+      pull.update_attributes status: @comment_body.downcase,
+        current_reviewer: nil, number_of_comments: @number_of_comments.to_i + 1
+
       ActionCable.server.broadcast "room_channel_#{ENV["ACTION_CABLE_SECRET"]}",
         {status: pull.status, id: pull.id, current_reviewer: pull.current_reviewer}
     else
       pull = PullRequest.create url: @pull_request["html_url"],
         repository_name: @repository["name"],
         github_account: @owner["login"],
-        status: "ready"
+        status: "ready",
+        number_of_comments: @number_of_comments.to_i + 1
     end
 
     if @payload["pull_request"] && @payload["pull_request"]["commits"] > 1

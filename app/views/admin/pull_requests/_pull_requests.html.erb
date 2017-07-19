@@ -9,6 +9,7 @@
       <th class="datetime">Updated Time</th>
       <th class="th-current-reviewer">Current Reviewer</th>
       <th class="status">Status</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -41,6 +42,11 @@
             <% end %>
           <% else %>
             <span class="<%= pull_request.status %>"><%= pull_request.status %></span>
+          <% end %>
+        </td>
+        <td class="td-comment">
+          <% if pull_request.number_of_comments %>
+            <i class="fa fa-comments-o" aria-hidden="true"></i> <%= pull_request.number_of_comments %>
           <% end %>
         </td>
       </tr>
