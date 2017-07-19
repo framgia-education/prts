@@ -91,5 +91,6 @@
 </table>
 
 <div class="text-center">
-  <%= paginate @users, theme: "twitter-bootstrap-4", pagination_class: "pagination-sm" %>
+  <%= paginate @users, left: 2, right: 3, theme: "twitter-bootstrap-4",
+    pagination_class: "pagination-sm" %>
 </div>
