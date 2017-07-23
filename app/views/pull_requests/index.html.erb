@@ -61,7 +61,7 @@
           <%= index_for params[:page] || 1, index, Settings.pull_request.per_page %>
         </td>
         <td>
-          <%= link_to pull_request.url_files, pull_request.url_files, target: "_blank" %>
+          <%= link_to pull_request.url, pull_request.url_files, target: "_blank" %>
         </td>
         <td><%= pull_request.repository_name %></td>
         <td class="pull-request-<%= pull_request.id %>">

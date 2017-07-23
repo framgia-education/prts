@@ -18,7 +18,8 @@
           <%= index_for params[:page] || 1, index, Settings.pull_request.per_page %>
         </td>
         <td>
-          <%= link_to truncate(pull_request.url_files, length: Settings.admin.pull_request.truncate_url),
+          <%= link_to truncate(pull_request.url[Settings.pull_request.start_point..-1],
+            length: Settings.admin.pull_request.truncate_url),
             pull_request.url_files, target: "_blank", title: pull_request.url %>
         </td>
         <td><%= pull_request.repository_name %></td>
