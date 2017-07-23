@@ -11,6 +11,7 @@ admin:
 pull_request:
   per_page: 5
   default_statuses: ["ready"]
+  start_point: 19
 active_users: 3
 user:
   office_choice:
