@@ -13,7 +13,7 @@ module Api
           partial: "/api/extensions/feeds/new_feeds",
           layout: false,
           locals: {
-            feeds: PullRequest.send(params[:status])
+            feeds: PullRequest.send(params[:status]).of_office(@user.office_id)
                               .order(updated_at: :asc).limit(limit)
           }
         )
