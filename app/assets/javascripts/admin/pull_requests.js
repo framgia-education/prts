@@ -13,7 +13,7 @@ $(document).ready(function(){
       type: 'POST',
       dataType: 'json',
       data: form.serialize(),
-      success: function (data) {
+      success: function (data){
         tdElem.html('<span class="' + data.status + '">' + data.status + '</span>');
         current_reviewer.removeClass('text-center');
         current_reviewer.html(data.current_reviewer);
@@ -22,7 +22,7 @@ $(document).ready(function(){
         var win = window.open(data.url_files, '_blank');
         win.focus();
       },
-      errors: function() {
+      errors: function(){
         alert('Update failed!!!');
       }
     });

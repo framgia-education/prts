@@ -15,12 +15,12 @@ $(document).on('ready', function(){
       dataType: 'html',
       url: $(this).attr('href'),
       method: 'get',
-      success: function(data) {
+      success: function(data){
         $('.modal-content-outer').removeClass('col-md-12');
         $('.modal-content-outer').addClass('col-md-10 col-md-offset-1');
         $('.modal-content').html(data);
       },
-      error: function() {
+      error: function(){
         alert('Oops!!! Cannot edit this chatroom!');
       }
     })
@@ -30,12 +30,12 @@ $(document).on('ready', function(){
     var count_error = 0;
     var error_message = '';
 
-    if($('.edit-chatroom-name').val() == '') {
+    if($('.edit-chatroom-name').val() == ''){
       count_error++;
       error_message += '<li class="text-danger">Name can\'t be blank</li>';
     }
 
-    if($('.edit-chatroom-id').val() == '') {
+    if($('.edit-chatroom-id').val() == ''){
       count_error++;
       error_message += '<li class="text-danger">Chatroom ID can\'t be blank</li>';
     }
