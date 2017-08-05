@@ -70,7 +70,9 @@
           <% end %>
         </td>
         <td><%= user.pull_requests.size %></td>
-        <td><span class="<%= user.role %>"><%= user.role %></span></td>
+        <td>
+          <span class="<%= user.role if user.role != 'normal' %>-user"><%= user.role %></span>
+        </td>
         <% if current_user.admin? %>
           <td>
             <%= link_to edit_admin_user_path(user), title: "Edit",
