@@ -10,6 +10,12 @@ class Admin::OfficesController < ApplicationController
 
   def new
     @office = Office.new
+    respond_to do |format|
+      format.html do
+        render partial: "form_office",
+          locals: {office: @office, modal_title: "New Office", button_text: "Create"}
+      end
+    end
   end
 
   def create
@@ -23,17 +29,29 @@ class Admin::OfficesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    respond_to do |format|
+      format.html{render partial: "show_office", locals: {office: @office}}
+    end
+  end
 
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.html do
+        render partial: "form_office",
+          locals: {office: @office, modal_title: "Edit Office", button_text: "Update"}
+      end
+    end
+  end
 
   def update
     if @office.update_attributes office_params
       flash[:success] = "Update office successfully!"
-      redirect_to admin_offices_url
     else
-      render :edit
+      flash[:alert] = "Oops!!! User office failed"
     end
+
+    redirect_to admin_offices_url
   end
 
   def destroy
@@ -46,6 +64,7 @@ class Admin::OfficesController < ApplicationController
         flash[:alert] = "Oops!!! Delete office failed"
       end
     end
+
     redirect_to admin_offices_url
   end
 
@@ -57,6 +76,7 @@ class Admin::OfficesController < ApplicationController
 
   def load_office
     @office = Office.find_by id: params[:id]
+
     return if @office
     flash[:alert] = "Oops!!! Office not found"
     redirect_to admin_offices_url

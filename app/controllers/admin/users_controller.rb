@@ -26,24 +26,43 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    respond_to do |format|
+      format.html{render partial: "show_user", locals: {user: @user}}
+    end
+  end
 
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.html do
+        render partial: "edit_user", locals: {user: @user, offices: @offices}
+      end
+    end
+  end
 
   def update
     if @user.update_attributes user_params
       flash[:success] = "Update user successfully!"
-      redirect_to admin_users_url
     else
-      render :edit
+      flash[:alert] = "Oops!!! Update user failed"
     end
+
+    redirect_to admin_users_url
   end
 
   def destroy
-    if @user.destroy
-      flash[:success] = "Delete user successfully!"
+    if @user.pull_requests.any?
+      flash[:alert]= "Cannot delete user having pull requests!"
     else
-      flash[:alert] = "Oops!!! Delete user failed"
+      if @user.role != "normal"
+        flash[:alert] = "Cannot delete account who is not normal user"
+      else
+        if @user.destroy
+          flash[:success] = "Delete user successfully!"
+        else
+          flash[:alert] = "Oops!!! Delete user failed"
+        end
+      end
     end
     redirect_to admin_users_url
   end
@@ -56,6 +75,7 @@ class Admin::UsersController < ApplicationController
 
   def load_user
     @user = User.find_by id: params[:id]
+
     return if @user
     flash[:alert] = "Oops!!! User not found"
     redirect_to admin_users_url

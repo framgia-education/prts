@@ -1,0 +1,69 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title" id="myModalLabel">Edit User</h4>
+</div>
+
+<%= form_for [:admin, @user] do |f| %>
+  <%#= render "shared/error_messages", object: f.object %>
+
+  <div class="modal-body">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name, class: "form-control",
+          required: true, placeholder: "Name" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, "Email" %>
+        <%= f.email_field :email, class: "form-control",
+          required: true, placeholder: "Email" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :office_id, "Office" %>
+        <%= f.select :office_id, options_for_select(@offices
+          .collect{|office| [office.name, office.id]}, @user.office_id),
+          {include_blank: Settings.admin.user.office_choice.blank_value},
+          class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :github_account, "Github account" %>
+        <%= f.text_field :github_account, class: "form-control",
+          placeholder: "Github account" %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :chatwork_id, "Chatwork account ID" %>
+        <%= f.text_field :chatwork_id, class: "form-control",
+          placeholder: "Chatwork account ID" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :chatwork_room_id, "Chatwork room ID" %>
+        <%= f.text_field :chatwork_room_id, class: "form-control",
+          placeholder: "Chatwork room ID" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :role %>
+        <div class="role-select">
+          <%= f.select :role, options_for_select(User.roles.keys, @user.role),
+            {}, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clear-both"></div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <%= f.submit "Update", class: "btn btn-primary" %>
+  </div>
+<% end %>

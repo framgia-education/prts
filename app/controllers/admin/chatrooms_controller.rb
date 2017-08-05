@@ -30,6 +30,7 @@ class Admin::ChatroomsController < ApplicationController
     else
       flash[:alert] = "Oops!!! Update chatroom failed"
     end
+
     redirect_to admin_chatrooms_url
   end
 
@@ -50,6 +51,7 @@ class Admin::ChatroomsController < ApplicationController
 
   def load_chatroom
     @chatroom = Chatroom.find_by id: params[:id]
+
     return if @chatroom
     flash[:alert] = "Oops!!! Cannot find chatroom"
     redirect_to admin_chatrooms_url
