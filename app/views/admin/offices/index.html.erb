@@ -5,7 +5,8 @@
   <% if current_user.admin? %>
     <div class="col-md-2">
       <div class="row">
-        <%= link_to new_admin_office_path, class: "btn btn-primary btn-sm" do %>
+        <%= link_to new_admin_office_path, class: "btn btn-primary btn-sm btn-new-office",
+          data: {toggle: "modal", target: "#prts-modal", backdrop: "static"} do %>
           <span class="glyphicon glyphicon-plus"></span> New Office
         <% end %>
       </div>
@@ -33,27 +34,7 @@
   </thead>
   <tbody>
     <% @offices.each_with_index do |office, index| %>
-      <tr>
-        <td>
-          <%= index_for params[:page] || 1, index, Settings.admin.office.per_page %>
-        </td>
-        <td><%= link_to office.name, admin_office_path(office) %></td>
-        <td><%= office.users.size %></td>
-        <td><%= total_pull_requests office %></td>
-        <td><%= office.address %></td>
-        <% if current_user.admin? %>
-          <td>
-            <%= link_to edit_admin_office_path(office), title: "Edit",
-              class: "btn btn-warning btn-xs" do %>
-              <span class="glyphicon glyphicon-edit"></span>
-            <% end %>
-            <%= link_to admin_office_path(office), method: :delete, title: "Delete",
-              class: "btn btn-danger btn-xs", data: {confirm: "Are you sure?"} do %>
-              <span class="glyphicon glyphicon-trash"></span>
-            <% end %>
-          </td>
-        <% end %>
-      </tr>
+      <%= render partial: "office_table", locals: {office: office, index: index} %>
     <% end %>
   </tbody>
 </table>

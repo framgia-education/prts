@@ -16,10 +16,12 @@ $(document).on('ready', function(){
       url: $(this).attr('href'),
       method: 'get',
       success: function(data) {
+        $('.modal-content-outer').removeClass('col-md-12');
+        $('.modal-content-outer').addClass('col-md-10 col-md-offset-1');
         $('.modal-content').html(data);
       },
       error: function() {
-        alert('Oops!!! Cannot edit this chatroom!')
+        alert('Oops!!! Cannot edit this chatroom!');
       }
     })
   })

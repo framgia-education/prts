@@ -5,7 +5,7 @@
   <td>
     <%= link_to edit_admin_chatroom_path(chatroom), title: "Edit",
       class: "btn btn-warning btn-xs btn-edit-chatroom",
-      data: {toggle: "modal", target: "#edit-chatroom", backdrop: "static"} do %>
+      data: {toggle: "modal", target: "#prts-modal", backdrop: "static"} do %>
       <span class="glyphicon glyphicon-edit"></span>
     <% end %>
     <%= link_to admin_chatroom_path(chatroom), method: :delete,
