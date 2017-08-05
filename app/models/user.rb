@@ -37,7 +37,10 @@ class User < ApplicationRecord
     end
 
     def from_omniauth auth
-      user = find_or_initialize_by(email: auth.info.email)
+      # user = find_or_initialize_by(email: auth.info.email)
+      user = User.find_by email: auth.info.email
+
+      return user if user.present?
       user.name = auth.info.name
       user.provider = auth.provider
       user.password = User.generate_unique_secure_token if user.new_record?

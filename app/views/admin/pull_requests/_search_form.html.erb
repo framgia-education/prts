@@ -29,7 +29,8 @@
             <td>
               <%= select_tag :office_id, options_for_select(@offices
                 .collect{|office| [office.name, office.id]}, params[:office_id]),
-                include_blank: "-- Select All --", class: "form-control office-classification chosen-select" %>
+                include_blank: "-- Select All --",
+                class: "form-control office-classification chosen-select" %>
             </td>
           </tr>
         </table>
@@ -44,7 +45,8 @@
             <td>
               <%= select_tag :repository, options_for_select(@support_pull_request.repositories
                 .collect{|object| [object.repository_name, object.repository_name]}, params[:repository]),
-                include_blank: "-- Select All --", class: "form-control repository-classification chosen-select" %>
+                include_blank: "-- Select All --",
+                class: "form-control repository-classification chosen-select" %>
             </td>
           </tr>
         </table>
@@ -59,7 +61,8 @@
             <td>
               <%= select_tag :github_account, options_for_select(@support_user.github_accounts
                 .collect{|object| [object.github_account, object.github_account]}, params[:github_account]),
-                include_blank: "-- Select All --", class: "form-control github-account-classification chosen-select" %>
+                include_blank: "-- Select All --",
+                class: "form-control github-account-classification chosen-select" %>
             </td>
           </tr>
         </table>
