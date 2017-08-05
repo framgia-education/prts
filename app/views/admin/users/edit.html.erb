@@ -33,6 +33,24 @@
     </div>
 
     <div class="form-group">
+      <%= f.label :github_account, "Github account" %>
+      <%= f.text_field :github_account, class: "form-control",
+        placeholder: "Github account" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :chatwork_id, "Chatwork account ID" %>
+      <%= f.text_field :chatwork_id, class: "form-control",
+        placeholder: "Chatwork account ID" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :chatwork_room_id, "Chatwork room ID" %>
+      <%= f.text_field :chatwork_room_id, class: "form-control",
+        placeholder: "Chatwork room ID" %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :role %>
       <div class="role-select">
         <%= f.select :role, options_for_select(User.roles.keys, @user.role), {},
