@@ -30,4 +30,23 @@ $(document).on('ready', function(){
   });
 
   set_up_chosen();
+
+  $('body').on('click', '.btn-generate-api-key', function(e){
+    e.preventDefault();
+    var form = $(this).parents('form');
+
+    $.ajax({
+      dataType: 'json',
+      url: form[0].action,
+      method: 'post',
+      data: form.serialize(),
+      success: function(data){
+        $('.oauth-token-text').html(data.oauth_token);
+        $('.oauth-token-text').css('background', 'pink');
+      },
+      error: function(){
+        alert('Oops!!! Generate API key failed');
+      }
+    })
+  })
 })

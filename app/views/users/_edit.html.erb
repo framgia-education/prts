@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title" id="myModalLabel">Update your information</h4>
+</div>
+
+<%= form_for @user do |f| %>
+  <div class="modal-body">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :github_account, "Github account" %>
+        <%= f.text_field :github_account, class: "form-control", required: true,
+          placeholder: "Github account" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :office_id, "Office" %>
+        <%= f.select :office_id, options_for_select(@offices
+          .collect{|office| [office.name, office.id]}, @user.office_id),
+          {include_blank: Settings.user.office_choice.blank_value}, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :chatwork_id, "Chatwork account ID" %>
+        <%= f.text_field :chatwork_id, class: "form-control", required: true,
+          placeholder: "Chatwork account ID" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :chatwork_room_id, "Chatwork room ID" %>
+        <%= f.text_field :chatwork_room_id, class: "form-control", required: true,
+          placeholder: "Chatwork room ID" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="clear-both"></div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <%= f.submit "Update", class: "btn btn-primary" %>
+  </div>
+<% end %>

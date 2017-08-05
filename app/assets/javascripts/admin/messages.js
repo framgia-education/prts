@@ -6,7 +6,7 @@ $(document).ready(function(){
   $('.chatrooms-list').on('change', function(){
     var room_id = $(this).val();
 
-    if(room_id == '') {
+    if(room_id == ''){
       $('.confirm-send-message-div').hide();
       $('.send-messge-div').show();
     } else {

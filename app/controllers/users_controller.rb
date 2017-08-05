@@ -2,17 +2,44 @@ class UsersController < ApplicationController
   before_action :load_user, :verify_user!
   before_action :load_offices, only: :edit
 
-  def show; end
+  def show
+    respond_to do |format|
+      format.js
+    end
+  end
 
-  def edit; end
+  def edit
+    respond_to do |format|
+      format.js
+    end
+  end
 
   def update
-    if current_user.update_attributes user_params
-      flash[:success] = "Update information success!"
+    if params[:user][:oauth_token].present?
+      respond_to do |format|
+        if current_user.update_attributes user_params
+          format.json do
+            render json: {
+              oauth_token: current_user.oauth_token
+            }, status: :ok
+          end
+        else
+          format.json do
+            render json: {
+              error: current_user.errors.full_messages
+            }, status: :unprocessable_entity
+          end
+        end
+      end
     else
-      flash[:alert] = "Oops!!! Update information failed"
+      if current_user.update_attributes user_params
+        flash[:success] = "Update information success!"
+      else
+        flash[:alert] = "Oops!!! Update information failed"
+      end
+
+      redirect_to request.referrer
     end
-    redirect_to request.referrer
   end
 
   private
