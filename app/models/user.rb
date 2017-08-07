@@ -42,7 +42,9 @@ class User < ApplicationRecord
       user = User.find_by email: auth.info.email
 
       return user if user.present?
+      user = User.new
       user.name = auth.info.name.present? ? auth.info.name : auth.info.email
+      user.email = auth.info.email
       user.provider = auth.provider
       user.password = User.generate_unique_secure_token if user.new_record?
       user.token = auth.credentials.token
