@@ -1,6 +1,8 @@
 module Api
   module Extensions
     class FeedsController < Api::BaseController
+      before_action :verify_params, :load_user
+
       def show
         render json: {content: feeds_content}
       end
