@@ -16,7 +16,10 @@ class User < ApplicationRecord
 
   enum role: [:normal, :trainer, :admin, :supporter]
 
-  ATTR_PARAMS = [:name, :email, :office_id, :github_account, :chatwork_id,
+  CREATE_ATTR_PARAMS = [:name, :email, :office_id, :role,
+    :password, :password_confirmation].freeze
+
+  UPDATE_ATTR_PARAMS = [:name, :email, :office_id, :github_account, :chatwork_id,
     :chatwork_room_id, :role].freeze
 
   delegate :name, to: :office, prefix: true, allow_nil: true

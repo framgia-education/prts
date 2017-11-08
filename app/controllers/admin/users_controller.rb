@@ -15,7 +15,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    @user = User.new user_params
+    @user = User.new create_user_params
 
     if @user.save
       flash[:success] = "Create user successfully!"
@@ -41,7 +41,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes user_params
+    if @user.update_attributes update_user_params
       flash[:success] = "Update user successfully!"
     else
       flash[:alert] = "Oops!!! Update user failed"
@@ -69,8 +69,12 @@ class Admin::UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit User::ATTR_PARAMS
+  def create_user_params
+    params.require(:user).permit User::CREATE_ATTR_PARAMS
+  end
+
+  def update_user_params
+    params.require(:user).permit User::UPDATE_ATTR_PARAMS
   end
 
   def load_user
