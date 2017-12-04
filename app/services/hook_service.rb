@@ -33,7 +33,7 @@ class HookService
       @owner = @payload["issue"]["user"]
       @sender = @payload["sender"]
       @pull_request = @payload["issue"]["pull_request"]
-      @comment_body = @comment["body"]
+      @comment_body = @comment["body"].strip
     else
       if @action == "closed"
         if @payload["pull_request"]["merged"]
@@ -59,10 +59,10 @@ class HookService
       temp = @comment_body.split "\r\n"
       temp.shift
       $remark = temp.join "\r\n"
-      @comment_body = @comment_body.split("\r\n").first.downcase
+      @comment_body = @comment_body.split("\r\n").first.downcase.strip
     end
 
-    return false unless MESSAGES_VALID.include?(@comment_body)
+    return false unless MESSAGES_VALID.include?(@comment_body.downcase)
 
     if (@sender == @owner && (["ready", "closed"].include? @comment_body)) ||
       WhiteList.first.github_account.include?(@sender["login"])
