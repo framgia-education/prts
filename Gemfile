@@ -19,7 +19,7 @@ gem "kaminari"
 gem "omniauth-framgia", git: "https://github.com/framgia-education/omniauth-framgia.git"
 gem "puma", "~> 3.0"
 gem "rails", "~> 5.0.2"
-gem "redis"
+gem "redis", "3.3.3"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
 
