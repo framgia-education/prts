@@ -7,7 +7,7 @@ class OmniauthCallbacksController < ApplicationController
 
     if @user.persisted?
       log_in @user
-      flash[:success] = "Sign in with #{auth.provider.upcase} successfully!"
+      flash[:success] = "Sign in with TMS System successfully!"
     else
       flash[:notice] = "Oops!!! Auth failure"
     end
