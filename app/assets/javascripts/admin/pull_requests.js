@@ -20,7 +20,7 @@ $(document).ready(function(){
         tdElem.attr('ready-to-reviewing', 1);
         updated_time.html("less than a minute ago");
         var win = window.open(data.url_files, '_blank');
-        win.focus();
+        // win.focus();
       },
       errors: function(){
         alert('Update failed!!!');
