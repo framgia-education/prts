@@ -40,12 +40,25 @@ class User < ApplicationRecord
       SecureRandom.urlsafe_base64
     end
 
+    # def from_omniauth auth
+    #   user = User.find_by email: auth.info.email
+
+    #   return user if user.present?
+    #   user = User.new
+    #   user.name = auth.info.name.present? ? auth.info.name : auth.info.email
+    #   user.email = auth.info.email
+    #   user.provider = auth.provider
+    #   user.password = User.generate_unique_secure_token if user.new_record?
+    #   user.token = auth.credentials.token
+    #   user.refresh_token = auth.credentials.refresh_token
+    #   user.save
+    #   user
+    # end
+
     def from_omniauth auth
-      # user = find_or_initialize_by(email: auth.info.email)
       user = User.find_by email: auth.info.email
 
-      return user if user.present?
-      user = User.new
+      user = User.new unless user.present?
       user.name = auth.info.name.present? ? auth.info.name : auth.info.email
       user.email = auth.info.email
       user.provider = auth.provider
