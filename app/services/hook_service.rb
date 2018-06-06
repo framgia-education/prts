@@ -9,24 +9,6 @@ class HookService
 
     Rails.logger.info "---------------------------> #{@action}"
 
-    # if @action == "closed" && @payload["pull_request"]["merged"]
-    #   @merged_pull = "merged"
-    #   @pull_request = @payload["pull_request"]
-    # elsif @action == "closed" && !@payload["pull_request"]["merged"]
-    #   @merged_pull = "closed"
-    #   @pull_request = @payload["pull_request"]
-    # elsif @action == "reopened"
-    #   @merged_pull = "reopened"
-    #   @pull_request = @payload["pull_request"]
-    # elsif @action == "created"
-    #   @repository = @payload["repository"]
-    #   @comment = @payload["comment"]
-    #   @owner = @payload["issue"]["user"]
-    #   @sender = @payload["sender"]
-    #   @pull_request = @payload["issue"]["pull_request"]
-    #   @comment_body = @comment["body"]
-    # end
-
     if @action == "created"
       @repository = @payload["repository"]
       @comment = @payload["comment"]

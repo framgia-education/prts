@@ -16,6 +16,7 @@ gem "config"
 gem "font-awesome-rails"
 gem "jquery-rails"
 gem "kaminari"
+gem "mysql2", ">= 0.3.18", "< 0.5"
 gem "omniauth-framgia", git: "https://github.com/framgia-education/omniauth-framgia.git"
 gem "puma", "~> 3.0"
 gem "rails", "~> 5.0.2"
@@ -26,7 +27,6 @@ gem "uglifier", ">= 1.3.0"
 group :development, :test do
   gem "byebug", platform: :mri
   gem "pry"
-  gem "sqlite3"
 end
 
 group :development do
