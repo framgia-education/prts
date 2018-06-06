@@ -12,22 +12,22 @@
 
 ActiveRecord::Schema.define(version: 20170705145230) do
 
-  create_table "chatrooms", force: :cascade do |t|
+  create_table "chatrooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "chatroom_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "offices", force: :cascade do |t|
+  create_table "offices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "address"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  create_table "pull_requests", force: :cascade do |t|
+  create_table "pull_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "url"
     t.integer  "status",           default: 0
     t.string   "repository_name"
@@ -35,11 +35,11 @@ ActiveRecord::Schema.define(version: 20170705145230) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.string   "current_reviewer"
-    t.index ["github_account"], name: "index_pull_requests_on_github_account"
-    t.index ["status"], name: "index_pull_requests_on_status"
+    t.index ["github_account"], name: "index_pull_requests_on_github_account", using: :btree
+    t.index ["status"], name: "index_pull_requests_on_status", using: :btree
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
@@ -55,15 +55,16 @@ ActiveRecord::Schema.define(version: 20170705145230) do
     t.datetime "updated_at",                   null: false
     t.string   "oauth_token"
     t.integer  "office_id"
-    t.index ["github_account"], name: "index_users_on_github_account"
-    t.index ["oauth_token"], name: "index_users_on_oauth_token", unique: true
-    t.index ["office_id"], name: "index_users_on_office_id"
+    t.index ["github_account"], name: "index_users_on_github_account", using: :btree
+    t.index ["oauth_token"], name: "index_users_on_oauth_token", unique: true, using: :btree
+    t.index ["office_id"], name: "index_users_on_office_id", using: :btree
   end
 
-  create_table "white_lists", force: :cascade do |t|
-    t.string   "github_account"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+  create_table "white_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "github_account", limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
+  add_foreign_key "users", "offices"
 end
