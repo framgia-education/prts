@@ -2,13 +2,13 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
+/log
+/tmp
 
 # Ignore rubymine
 .idea/*
 
-/public/*
+/public
 
 # Ignore Byebug command history file.
 .byebug_history

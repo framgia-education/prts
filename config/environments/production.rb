@@ -28,7 +28,7 @@ Rails.application.configure do
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = "https://prts.herokuapp.com/"
+  config.action_controller.asset_host = "http://prts.framgia.vn/"
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
@@ -36,11 +36,11 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
-  # config.action_cable.url = 'wss://example.com/cable'
-  config.action_cable.allowed_request_origins = ["http://prts.herokuapp.com/", "https://prts.herokuapp.com/"]
+  config.action_cable.url = "wss://prts.framgia.vn/cable"
+  config.action_cable.allowed_request_origins = ["http://prts.framgia.vn/", "https://prts.framgia.vn/"]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -84,5 +84,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.web_socket_server_url = "wss://prts.herokuapp.com/cable"
+  config.web_socket_server_url = "wss://prts.framgia.vn/cable"
 end
