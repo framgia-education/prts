@@ -1,7 +1,5 @@
 $(document).ready(function(){
-  $('body').on('click', '.pull-status span.ready', function(event) {
-    event.preventDefault();
-
+  $('body').on('click', '.pull-status span.ready', function() {
     if(confirm('Are you sure?') == false) return false;
     var spanElem = $(this);
     var tdElem = spanElem.parents('.pull-status');
